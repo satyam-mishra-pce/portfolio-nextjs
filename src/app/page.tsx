@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import BatmanModel from "@/components/BatmanModel";
 import BatDots from "@/components/BatDots";
 import { FlickeringGrid } from "@/components/FlickeringGrid";
+import SocialStack from "@/components/SocialStack";
 import { profile, projects, skills, experience, education } from "@/lib/data";
 
 const COL = "mx-auto w-full max-w-[680px] px-6";
@@ -107,7 +108,7 @@ export default function Home() {
 
       {/* ─────────────────────── WORK / PROJECTS ────────────────── */}
       <section id="work" className="py-28 md:py-32">
-        <div className={COL}>
+        <div className="mx-auto w-full max-w-[1040px] px-6">
           <Reveal
             as="h2"
             className="mb-12 font-display text-3xl tracking-[-0.01em] md:text-4xl"
@@ -115,14 +116,14 @@ export default function Home() {
             Selected work
           </Reveal>
 
-          <div className="grid auto-rows-[minmax(11rem,1fr)] grid-cols-1 gap-3 sm:grid-cols-2 lg:auto-rows-[13.5rem] lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {projects.map((p, i) => (
               <Reveal key={p.index} delay={i * 40} className={p.span}>
                 <a
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex h-full flex-col justify-between rounded-2xl border border-ink-line bg-ink-soft p-6 transition-colors duration-300 hover:border-ivory-faint hover:bg-ivory/[0.03]"
+                  className="group flex h-full min-h-[13.5rem] flex-col justify-between rounded-2xl border border-ink-line bg-ink-soft p-6 transition-colors duration-300 hover:border-ivory-faint hover:bg-ivory/[0.03]"
                 >
                   <div className="flex items-start justify-between">
                     <Image
@@ -131,21 +132,23 @@ export default function Home() {
                       aria-hidden
                       width={96}
                       height={96}
-                      className="h-11 w-11 select-none object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
+                      className={`${p.featured ? "h-14 w-14" : "h-11 w-11"} select-none object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]`}
                     />
                     <span className="mono text-xs text-ivory-faint">{p.year}</span>
                   </div>
-                  <div className="mt-6">
-                    <h3 className="flex items-center gap-2 text-lg font-medium text-ivory">
+                  <div className="mt-8">
+                    <h3
+                      className={`flex items-center gap-2 font-medium text-ivory ${p.featured ? "text-2xl" : "text-lg"}`}
+                    >
                       {p.title}
                       <span className="translate-x-[-4px] text-ivory-faint opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
                         ↗
                       </span>
                     </h3>
-                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ivory-dim">
+                    <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-ivory-dim">
                       {p.blurb}
                     </p>
-                    <div className="mono mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-ivory-faint">
+                    <div className="mono mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-ivory-faint">
                       <span className="text-ivory-dim">{p.role}</span>
                       <span aria-hidden>·</span>
                       {p.tags.join("  ·  ")}
@@ -271,21 +274,11 @@ export default function Home() {
               <Reveal
                 key={ed.degree}
                 delay={i * 50}
-                className="flex items-start gap-4 border-b border-ink-line py-7"
+                className="grid grid-cols-1 gap-2 border-b border-ink-line py-7 md:grid-cols-[150px_1fr] md:gap-8"
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink-soft ring-1 ring-ink-line">
-                  <Image
-                    src={ed.icon}
-                    alt=""
-                    aria-hidden
-                    width={96}
-                    height={96}
-                    className="h-7 w-7 select-none object-contain drop-shadow-[0_3px_8px_rgba(0,0,0,0.5)]"
-                  />
-                </div>
+                <div className="label pt-1.5">{ed.period}</div>
                 <div>
-                  <span className="label">{ed.period}</span>
-                  <h3 className="mt-1.5 text-lg font-medium text-ivory">{ed.degree}</h3>
+                  <h3 className="text-lg font-medium text-ivory">{ed.degree}</h3>
                   <p className="mono mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-ivory-faint">
                     <span className="text-ivory-dim">{ed.org}</span>
                     <span aria-hidden>·</span>
@@ -316,8 +309,8 @@ export default function Home() {
           />
 
           <div className="relative z-10 mx-auto max-w-[680px]">
-            <h2 className="max-w-[16ch] font-display text-[clamp(2rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em] text-ink">
-              Got something to build? I would love to help.
+            <h2 className="max-w-[14ch] font-display text-[clamp(2rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em] text-ink">
+              Got something to build? Light the signal.
             </h2>
 
             <a
@@ -332,28 +325,14 @@ export default function Home() {
               </span>
             </a>
 
-            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-ink/10 pt-6">
-              {profile.socials
-                .filter((s) => s.label !== "Email")
-                .map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-1.5 text-sm text-ink/70 transition-colors hover:text-ink"
-                  >
-                    {s.label}
-                    <span className="text-ink/40 transition-transform duration-300 group-hover:translate-x-0.5">
-                      ↗
-                    </span>
-                  </a>
-                ))}
+            <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-4 border-t border-ink/10 pt-7">
+              <span className="text-sm text-ink/60">Reach me on</span>
+              <SocialStack />
             </div>
 
-            <div className="mt-10 flex flex-col gap-2 text-xs text-ink/50 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-12 flex flex-col gap-2 text-xs text-ink/50 sm:flex-row sm:items-center sm:justify-between">
               <span className="mono">© {profile.name}</span>
-              <span className="mono">Built in the dark, with love</span>
+              <span className="mono">Built after dark</span>
               <a
                 href="#top"
                 className="mono uppercase tracking-widest transition-colors hover:text-ink"
