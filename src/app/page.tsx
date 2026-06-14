@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
 import BatmanModel from "@/components/BatmanModel";
@@ -95,6 +96,14 @@ export default function Home() {
           <Reveal className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-ink-line pt-12 sm:grid-cols-4">
             {profile.stats.map((s) => (
               <div key={s.label}>
+                <Image
+                  src={s.icon}
+                  alt=""
+                  aria-hidden
+                  width={96}
+                  height={96}
+                  className="mb-3 h-9 w-9 select-none object-contain opacity-90 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
+                />
                 <div className="font-display text-3xl text-ivory md:text-4xl">
                   {s.value}
                 </div>
@@ -168,12 +177,22 @@ export default function Home() {
                 delay={i * 50}
                 className="grid grid-cols-1 gap-3 border-b border-ink-line py-7 md:grid-cols-[180px_1fr] md:gap-8"
               >
-                <dt>
-                  <span className="font-display text-xl text-ivory">
-                    {g.title}
-                  </span>
-                  <span className="label mt-1 block normal-case tracking-normal">
-                    {g.note}
+                <dt className="flex items-start gap-3">
+                  <Image
+                    src={g.icon}
+                    alt=""
+                    aria-hidden
+                    width={96}
+                    height={96}
+                    className="mt-0.5 h-9 w-9 shrink-0 select-none object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
+                  />
+                  <span>
+                    <span className="font-display text-xl text-ivory">
+                      {g.title}
+                    </span>
+                    <span className="label mt-1 block normal-case tracking-normal">
+                      {g.note}
+                    </span>
                   </span>
                 </dt>
                 <dd className="flex flex-wrap gap-x-5 gap-y-2.5 md:pt-1">

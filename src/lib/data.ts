@@ -11,10 +11,10 @@ export const profile = {
   intro:
     "Full stack developer with a soft spot for the seams between systems: the API contract, the cache boundary, the moment a click becomes a database write. I care about shipping software that stays simple as it scales, and about interfaces people don't have to think about.",
   stats: [
-    { value: "6+", label: "Years building" },
-    { value: "40+", label: "Projects shipped" },
-    { value: "12", label: "Open-source repos" },
-    { value: "∞", label: "Cups of chai" },
+    { value: "6+", label: "Years building", icon: "/icons/hammer.png" },
+    { value: "40+", label: "Projects shipped", icon: "/icons/rocket.png" },
+    { value: "12", label: "Open-source repos", icon: "/icons/star.png" },
+    { value: "∞", label: "Cups of chai", icon: "/icons/coffee-cup.png" },
   ],
   socials: [
     { label: "GitHub", handle: "@satyam", href: "https://github.com" },
@@ -80,27 +80,31 @@ export const projects: Project[] = [
   },
 ];
 
-export type SkillGroup = { title: string; note: string; items: string[] };
+export type SkillGroup = { title: string; note: string; icon: string; items: string[] };
 
 export const skills: SkillGroup[] = [
   {
     title: "Frontend",
     note: "Interfaces & experience",
+    icon: "/icons/magic-wand.png",
     items: ["TypeScript", "React", "Next.js", "Tailwind", "Motion", "Vue"],
   },
   {
     title: "Backend",
     note: "APIs & business logic",
+    icon: "/icons/cpu.png",
     items: ["Node.js", "Go", "Python", "tRPC", "GraphQL", "REST"],
   },
   {
     title: "Data",
     note: "Storage & streams",
+    icon: "/icons/database.png",
     items: ["PostgreSQL", "Redis", "ClickHouse", "Kafka", "Prisma", "Drizzle"],
   },
   {
     title: "Infra",
     note: "Ship & operate",
+    icon: "/icons/container.png",
     items: ["Docker", "Kubernetes", "AWS", "Terraform", "Vercel", "GitHub Actions"],
   },
 ];
