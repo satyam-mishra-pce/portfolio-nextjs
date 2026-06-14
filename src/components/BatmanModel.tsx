@@ -14,7 +14,7 @@ import * as THREE from "three";
 // about its own vertical axis (a turntable), not around an off-center pivot.
 const FIT = 5.4; // normalized height in world units (larger = more zoomed)
 const REST_Y = -3.0; // resting offset — only head/eyes visible
-const HOVER_Y = -1.7; // hovered offset — revealed to the chest
+const HOVER_Y = -2.15; // hovered offset — revealed to the chest while keeping the ears in frame
 const ROT_Y = 0; // base yaw so he faces the viewer
 const MAX_YAW = 0.6; // radians he turns toward the cursor's horizontal side
 
@@ -51,8 +51,9 @@ function Batman({ hovered }: { hovered: boolean }) {
     // hover reveal (Y position)
     const ty = hovered ? HOVER_Y : REST_Y;
     g.position.y += (ty - g.position.y) * k;
-    // turn left/right toward the cursor (Y axis only)
-    const tr = ROT_Y + MAX_YAW * yaw.current;
+    // turn left/right toward the cursor (Y axis only) — only while hovered,
+    // otherwise ease back to facing the viewer
+    const tr = ROT_Y + (hovered ? MAX_YAW * yaw.current : 0);
     g.rotation.y += (tr - g.rotation.y) * k;
   });
 
