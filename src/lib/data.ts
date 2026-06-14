@@ -1,26 +1,27 @@
-// ── All content lives here. Replace the dummy data with real details later. ──
+// ── All content lives here. Sourced from the resume repo + satyx.dev (2025). ──
 
 export const profile = {
   name: "Satyam Mishra",
-  role: "Full Stack Developer",
-  location: "Bengaluru, India",
+  role: "Full-Stack Developer",
+  location: "Jaipur, India",
   available: true,
-  email: "satyam@example.com",
+  email: "satyam1308mishra@gmail.com",
   tagline:
-    "I design and build resilient web applications end to end — from typed APIs and data models to interfaces that feel inevitable.",
+    "I build web applications end to end — accessible, carefully-crafted React interfaces and the on-chain logic that powers them.",
   intro:
-    "Full stack developer with a soft spot for the seams between systems: the API contract, the cache boundary, the moment a click becomes a database write. I care about shipping software that stays simple as it scales, and about interfaces people don't have to think about.",
+    "A front-end developer who cares about the details: considered state management, accessibility, and interfaces that feel inevitable. I work across React and Next.js, and I'm increasingly at home in Web3 — building dApps with wagmi, viem, and ethers. I like keeping a few projects in flight at once.",
   stats: [
-    { value: "6+", label: "Years building", icon: "/icons/hammer.png" },
-    { value: "40+", label: "Projects shipped", icon: "/icons/rocket.png" },
-    { value: "12", label: "Open-source repos", icon: "/icons/star.png" },
-    { value: "∞", label: "Cups of chai", icon: "/icons/coffee-cup.png" },
+    { value: "163", label: "WPM peak typing", icon: "/icons/keyboard.png" },
+    { value: "Knight", label: "LeetCode badge", icon: "/icons/shield.png" },
+    { value: "2", label: "Hackathons won", icon: "/icons/trophy.png" },
+    { value: "60+", label: "Public repos", icon: "/icons/star.png" },
   ],
   socials: [
-    { label: "GitHub", handle: "@satyam", href: "https://github.com" },
-    { label: "LinkedIn", handle: "in/satyam", href: "https://linkedin.com" },
-    { label: "X / Twitter", handle: "@satyam", href: "https://x.com" },
-    { label: "Email", handle: "satyam@example.com", href: "mailto:satyam@example.com" },
+    { label: "GitHub", handle: "@satyam-mishra-pce", href: "https://github.com/satyam-mishra-pce" },
+    { label: "LinkedIn", handle: "in/mishra-satyam", href: "https://www.linkedin.com/in/mishra-satyam" },
+    { label: "X / Twitter", handle: "@Satyam_Mis", href: "https://x.com/Satyam_Mis" },
+    { label: "LeetCode", handle: "satyam_mishra13", href: "https://leetcode.com/satyam_mishra13" },
+    { label: "Email", handle: "satyam1308mishra@gmail.com", href: "mailto:satyam1308mishra@gmail.com" },
   ],
 };
 
@@ -38,45 +39,45 @@ export type Project = {
 export const projects: Project[] = [
   {
     index: "01",
-    title: "Helios Analytics",
+    title: "Clockworks",
     blurb:
-      "A real-time analytics platform processing 2M events/day. Built a streaming ingestion pipeline and a sub-second query layer with materialized rollups.",
-    year: "2025",
-    role: "Lead Full Stack",
-    tags: ["Next.js", "ClickHouse", "Kafka", "tRPC"],
-    href: "#",
+      "An npm package for fully customizable analog clocks in React, with a live configurator exposing 20+ options for hands, styles, and animations — built on Radix UI primitives for accessibility.",
+    year: "2024",
+    role: "Creator",
+    tags: ["React", "TypeScript", "npm", "Radix UI"],
+    href: "https://clockworks-rcc.vercel.app/",
     featured: true,
   },
   {
     index: "02",
-    title: "Orbit Commerce",
+    title: "Cryptophile",
     blurb:
-      "Headless storefront and admin for a D2C brand. Edge-rendered product pages, Stripe checkout, and an inventory sync engine across three warehouses.",
+      "A password and private-key manager with 256-bit client-side encryption — fully private via local storage, with intricate Zustand state and strict TypeScript across 90%+ of the codebase.",
     year: "2024",
-    role: "Full Stack",
-    tags: ["React", "Node", "PostgreSQL", "Stripe"],
-    href: "#",
+    role: "Creator",
+    tags: ["Next.js", "TypeScript", "Zustand", "Web Crypto"],
+    href: "https://cryptophile.web.app/",
     featured: true,
   },
   {
     index: "03",
-    title: "Quill",
+    title: "Cryptofund",
     blurb:
-      "Collaborative markdown editor with CRDT-based real-time sync, offline support, and a plugin API. Open source, 1.4k stars.",
+      "A crowdfunding dApp where campaigns live on-chain. Led a team of four to a top-3 finish out of 100+ teams, with Solidity contracts deployed across two chains and multi-wallet support.",
     year: "2024",
-    role: "Creator",
-    tags: ["TypeScript", "Yjs", "WebSocket", "Tauri"],
-    href: "#",
+    role: "Lead · Team of 4",
+    tags: ["Solidity", "Web3", "Next.js", "Multi-chain"],
+    href: "https://cryptofund-next.vercel.app/",
   },
   {
     index: "04",
-    title: "Atlas DevOps",
+    title: "Sorting Visualizer",
     blurb:
-      "Internal platform that turned a 40-minute manual deploy into a one-click pipeline with preview environments and automatic rollbacks.",
-    year: "2023",
-    role: "Platform Engineer",
-    tags: ["Go", "Kubernetes", "Terraform", "gRPC"],
-    href: "#",
+      "An interactive visualizer for five sorting algorithms with fine-grained speed control up to 1000 moves/second, plus an image-slicing mode that animates the sort across a picture.",
+    year: "2024",
+    role: "Creator",
+    tags: ["React", "Algorithms", "Canvas"],
+    href: "https://sorting-visualizer-react.web.app/",
   },
 ];
 
@@ -87,25 +88,19 @@ export const skills: SkillGroup[] = [
     title: "Frontend",
     note: "Interfaces & experience",
     icon: "/icons/magic-wand.png",
-    items: ["TypeScript", "React", "Next.js", "Tailwind", "Motion", "Vue"],
+    items: ["TypeScript", "React", "Next.js", "Tailwind", "HTML", "CSS"],
   },
   {
-    title: "Backend",
-    note: "APIs & business logic",
-    icon: "/icons/cpu.png",
-    items: ["Node.js", "Go", "Python", "tRPC", "GraphQL", "REST"],
+    title: "Web3",
+    note: "On-chain & dApps",
+    icon: "/icons/coins.png",
+    items: ["Solidity", "wagmi", "viem", "ethers", "Multi-chain"],
   },
   {
-    title: "Data",
-    note: "Storage & streams",
-    icon: "/icons/database.png",
-    items: ["PostgreSQL", "Redis", "ClickHouse", "Kafka", "Prisma", "Drizzle"],
-  },
-  {
-    title: "Infra",
-    note: "Ship & operate",
-    icon: "/icons/container.png",
-    items: ["Docker", "Kubernetes", "AWS", "Terraform", "Vercel", "GitHub Actions"],
+    title: "Tooling",
+    note: "Build & ship",
+    icon: "/icons/wrench.png",
+    items: ["Git", "Linux", "Vercel", "npm"],
   },
 ];
 
@@ -119,44 +114,38 @@ export type Job = {
 
 export const experience: Job[] = [
   {
-    period: "2023 — Present",
-    role: "Senior Full Stack Developer",
-    org: "Nimbus Labs",
+    period: "2025 — Present",
+    role: "Front-End & Web3 Engineer",
+    org: "GainForest",
     summary:
-      "Lead a squad of four building the core analytics product. Owned architecture decisions from the streaming layer to the dashboard, and cut p95 query latency by 70%.",
-    stack: ["Next.js", "Go", "ClickHouse", "Kubernetes"],
+      "Design and build dApps with wagmi, viem, and ethers, and maintain a shared React component library that cut development time. Ship well-documented pull requests with clear changelogs, remotely.",
+    stack: ["React", "wagmi", "viem", "TypeScript"],
   },
   {
-    period: "2021 — 2023",
-    role: "Full Stack Developer",
-    org: "Meridian Studio",
+    period: "2024",
+    role: "Front-End Developer",
+    org: "Epoch Protocol",
     summary:
-      "Shipped client products across e-commerce, fintech, and media. Introduced a typed end-to-end stack that became the studio's default and halved onboarding time.",
-    stack: ["React", "Node.js", "PostgreSQL", "AWS"],
+      "Built 4+ decentralized applications for a Web3 automation company — wireframing dApp flows and implementing them in React, with regular code reviews to keep the codebase clean.",
+    stack: ["React", "Web3", "TypeScript"],
   },
   {
-    period: "2019 — 2021",
-    role: "Software Engineer",
-    org: "Bytewave",
+    period: "2023",
+    role: "Themes Freelancer",
+    org: "Samsung",
     summary:
-      "First engineering hire at a seed-stage startup. Built the MVP, the billing system, and the deploy pipeline — and learned to make tradeoffs under real constraints.",
-    stack: ["Vue", "Python", "Redis", "Docker"],
-  },
-  {
-    period: "2018 — 2019",
-    role: "Junior Developer",
-    org: "Freelance",
-    summary:
-      "Built websites and small apps for local businesses while finishing my degree. Where the obsession with shipping started.",
-    stack: ["JavaScript", "PHP", "MySQL"],
+      "Created 10+ custom themes for Samsung devices with the Theme Studio app, designing 5+ screens per theme in Figma. Several themes passed 100+ downloads.",
+    stack: ["Figma", "Theme Studio", "UI Design"],
   },
 ];
 
 export const marquee = [
-  "Full Stack",
-  "Distributed Systems",
-  "Type-Safe APIs",
-  "Real-Time",
-  "Design Engineering",
+  "Front-End",
+  "Web3",
+  "React",
+  "Next.js",
+  "UI Design",
   "Open Source",
+  "dApps",
+  "TypeScript",
 ];

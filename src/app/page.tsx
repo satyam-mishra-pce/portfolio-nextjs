@@ -129,6 +129,8 @@ export default function Home() {
               <Reveal key={p.index} as="li" delay={i * 50}>
                 <a
                   href={p.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group block border-b border-ink-line py-9 transition-opacity duration-300"
                 >
                   <div className="flex items-baseline justify-between gap-6">

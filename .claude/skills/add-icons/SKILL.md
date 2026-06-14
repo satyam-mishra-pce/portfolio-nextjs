@@ -83,7 +83,9 @@ rm -f /tmp/things.html /tmp/catalog.tsv   # don't leave temp files behind
 
 ## Currently used icons
 
-Toolkit: `magic-wand` (Frontend), `cpu` (Backend), `database` (Data), `container` (Infra).
-Stats: `hammer` (Years building), `rocket` (Projects shipped), `star` (Open-source repos), `coffee-cup` (Cups of chai).
+Toolkit: `magic-wand` (Frontend), `coins` (Web3), `wrench` (Tooling).
+Stats: `keyboard` (WPM typing), `shield` (LeetCode badge), `trophy` (Hackathons won), `star` (Public repos).
+
+Keep `public/icons/` free of orphans — when you swap an icon out, delete the unused PNG.
 
 Note: thiings is generic 3D objects, **not brand logos** — don't use it for GitHub/LinkedIn/tech-stack logos. The socials and project links use text arrows (`↗`/`→`) by design.
