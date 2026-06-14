@@ -1,6 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState, type ElementType, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentType,
+  type CSSProperties,
+  type ElementType,
+  type ReactNode,
+  type Ref,
+} from "react";
 
 export default function Reveal({
   children,
@@ -32,13 +41,23 @@ export default function Reveal({
     return () => io.disconnect();
   }, []);
 
+  // Cast the dynamic tag to a concrete component type so JSX resolves props
+  // from it, sidestepping the intrinsic-element union collapse that
+  // @react-three/fiber's global JSX augmentation otherwise triggers here.
+  const Component = Tag as ComponentType<{
+    ref?: Ref<HTMLElement>;
+    className?: string;
+    style?: CSSProperties;
+    children?: ReactNode;
+  }>;
+
   return (
-    <Tag
+    <Component
       ref={ref}
       className={`reveal ${shown ? "in" : ""} ${className}`}
       style={{ ["--reveal-delay" as string]: `${delay}ms` }}
     >
       {children}
-    </Tag>
+    </Component>
   );
 }
