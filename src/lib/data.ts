@@ -1,25 +1,25 @@
-// ── All content lives here. Sourced from the resume repo + satyx.dev (2025). ──
+// ── All content lives here. Real data, sourced from satyx.dev + resume repo. ──
 
 export const profile = {
   name: "Satyam Mishra",
-  role: "Full-Stack Developer",
+  role: "Full Stack Developer",
   location: "Jaipur, India",
   available: true,
   email: "satyam1308mishra@gmail.com",
   tagline:
-    "I build web applications end to end — accessible, carefully-crafted React interfaces and the on-chain logic that powers them.",
+    "I have been writing code since I was a kid, and I still open my editor for fun. I build for the web, mostly the parts people touch, and I sweat the details.",
   intro:
-    "A front-end developer who cares about the details: considered state management, accessibility, and interfaces that feel inevitable. I work across React and Next.js, and I'm increasingly at home in Web3 — building dApps with wagmi, viem, and ethers. I like keeping a few projects in flight at once.",
+    "I started coding as a child and never found a reason to stop. Most days it does not feel like work. I am a UI person before anything else: I cannot always picture an interface in my head, but hand me one and I can build it exactly, and I can look at a clumsy screen and tell you precisely what is wrong with it. These days I work mostly in React and Next.js, with a good amount of Web3 on the side.",
   stats: [
     { value: "163", label: "WPM peak typing", icon: "/icons/keyboard.png" },
     { value: "1000", label: "Day LeetCode streak", icon: "/icons/shield.png" },
     { value: "2", label: "Hackathons won", icon: "/icons/trophy.png" },
-    { value: "1.9k+", label: "Contributions / yr", icon: "/icons/star.png" },
+    { value: "1.9k+", label: "Contributions a year", icon: "/icons/star.png" },
   ],
   socials: [
-    { label: "GitHub", handle: "@satyam-mishra-pce", href: "https://github.com/satyam-mishra-pce" },
+    { label: "GitHub", handle: "satyam-mishra-pce", href: "https://github.com/satyam-mishra-pce" },
     { label: "LinkedIn", handle: "in/mishra-satyam", href: "https://www.linkedin.com/in/mishra-satyam" },
-    { label: "X / Twitter", handle: "@Satyam_Mis", href: "https://x.com/Satyam_Mis" },
+    { label: "X / Twitter", handle: "Satyam_Mis", href: "https://x.com/Satyam_Mis" },
     { label: "LeetCode", handle: "satyam_mishra13", href: "https://leetcode.com/satyam_mishra13" },
     { label: "Email", handle: "satyam1308mishra@gmail.com", href: "mailto:satyam1308mishra@gmail.com" },
   ],
@@ -33,7 +33,8 @@ export type Project = {
   role: string;
   tags: string[];
   href: string;
-  featured?: boolean;
+  icon: string;
+  span: string;
 };
 
 export const projects: Project[] = [
@@ -41,43 +42,61 @@ export const projects: Project[] = [
     index: "01",
     title: "Clockworks",
     blurb:
-      "An npm package for fully customizable analog clocks in React, with a live configurator exposing 20+ options for hands, styles, and animations — built on Radix UI primitives for accessibility.",
+      "An npm package for fully customizable analog clocks in React, with a live configurator exposing 20+ options for hands, styles, and animations, built on Radix UI primitives so it stays accessible.",
     year: "2024",
     role: "Creator",
     tags: ["React", "TypeScript", "npm", "Radix UI"],
     href: "https://clockworks-rcc.vercel.app/",
-    featured: true,
+    icon: "/icons/clock.png",
+    span: "lg:col-span-2 lg:row-span-2",
   },
   {
     index: "02",
     title: "Cryptophile",
     blurb:
-      "A password and private-key manager with 256-bit client-side encryption — fully private via local storage, with intricate Zustand state and strict TypeScript across 90%+ of the codebase.",
+      "A password and private key manager with 256 bit encryption that runs entirely in your browser. Nothing ever leaves your device.",
     year: "2024",
     role: "Creator",
     tags: ["Next.js", "TypeScript", "Zustand", "Web Crypto"],
     href: "https://cryptophile.web.app/",
-    featured: true,
+    icon: "/icons/padlock.png",
+    span: "",
   },
   {
     index: "03",
     title: "Cryptofund",
     blurb:
-      "A crowdfunding dApp where campaigns live on-chain. Led a team of four to a top-3 finish out of 100+ teams, with Solidity contracts deployed across two chains and multi-wallet support.",
+      "A crowdfunding dApp where campaigns live on chain. I led a team of four to a top 3 finish out of 100+ teams, with Solidity contracts on two chains.",
     year: "2024",
     role: "Lead · Team of 4",
-    tags: ["Solidity", "Web3", "Next.js", "Multi-chain"],
+    tags: ["Solidity", "Web3", "Next.js", "Multichain"],
     href: "https://cryptofund-next.vercel.app/",
+    icon: "/icons/money-bag.png",
+    span: "",
   },
   {
     index: "04",
     title: "Sorting Visualizer",
     blurb:
-      "An interactive visualizer for five sorting algorithms with fine-grained speed control up to 1000 moves/second, plus an image-slicing mode that animates the sort across a picture.",
+      "An interactive way to watch five sorting algorithms run, with fine control over speed up to 1000 moves a second, plus a mode that sorts a sliced image.",
     year: "2024",
     role: "Creator",
     tags: ["React", "Algorithms", "Canvas"],
     href: "https://sorting-visualizer-react.web.app/",
+    icon: "/icons/chart.png",
+    span: "",
+  },
+  {
+    index: "05",
+    title: "Dynamic Island",
+    blurb:
+      "Apple's Dynamic Island, rebuilt for the web. A small, springy component that expands, morphs, and collapses to show whatever you need, with motion that feels right.",
+    year: "2024",
+    role: "Creator",
+    tags: ["React", "Framer Motion", "TypeScript"],
+    href: "https://dynamic-island-react.vercel.app",
+    icon: "/icons/smartphone.png",
+    span: "sm:col-span-2",
   },
 ];
 
@@ -86,19 +105,19 @@ export type SkillGroup = { title: string; note: string; icon: string; items: str
 export const skills: SkillGroup[] = [
   {
     title: "Frontend",
-    note: "Interfaces & experience",
+    note: "Interfaces and experience",
     icon: "/icons/magic-wand.png",
     items: ["TypeScript", "React", "Next.js", "Tailwind", "HTML", "CSS"],
   },
   {
     title: "Web3",
-    note: "On-chain & dApps",
+    note: "On chain and dApps",
     icon: "/icons/coins.png",
-    items: ["Solidity", "wagmi", "viem", "ethers", "Multi-chain"],
+    items: ["Solidity", "wagmi", "viem", "ethers", "Multichain"],
   },
   {
     title: "Tooling",
-    note: "Build & ship",
+    note: "Build and ship",
     icon: "/icons/wrench.png",
     items: ["Git", "Linux", "Vercel", "npm"],
   },
@@ -110,40 +129,45 @@ export type Job = {
   org: string;
   summary: string;
   stack: string[];
+  icon: string;
 };
 
 export const experience: Job[] = [
   {
     period: "2025 — Present",
-    role: "Front-End & Web3 Engineer",
+    role: "Frontend & Web3 Engineer",
     org: "GainForest",
     summary:
-      "Design and build dApps with wagmi, viem, and ethers, and maintain a shared React component library that cut development time. Ship well-documented pull requests with clear changelogs, remotely.",
+      "I design and build dApps with wagmi, viem, and ethers, and keep a shared React component library in good shape so the team ships faster. I write pull requests with clear descriptions and changelogs.",
     stack: ["React", "wagmi", "viem", "TypeScript"],
+    icon: "/icons/tree.png",
   },
   {
     period: "2024",
-    role: "Front-End Developer",
+    role: "Frontend Developer",
     org: "Epoch Protocol",
     summary:
-      "Built 4+ decentralized applications for a Web3 automation company — wireframing dApp flows and implementing them in React, with regular code reviews to keep the codebase clean.",
+      "I built more than four decentralized apps for a Web3 automation company, taking each from wireframe to working React, with regular reviews to keep the code clean.",
     stack: ["React", "Web3", "TypeScript"],
+    icon: "/icons/hourglass.png",
   },
   {
     period: "2023",
     role: "Themes Freelancer",
     org: "Samsung",
     summary:
-      "Created 10+ custom themes for Samsung devices with the Theme Studio app, designing 5+ screens per theme in Figma. Several themes passed 100+ downloads.",
+      "I made more than ten custom themes for Samsung devices in their Theme Studio app, designing five or more screens per theme in Figma. A few passed 100 downloads.",
     stack: ["Figma", "Theme Studio", "UI Design"],
+    icon: "/icons/sketchbook.png",
   },
   {
     period: "2018 — 2019",
     role: "Junior Developer",
     org: "Freelance",
     summary:
-      "Built websites and small apps for local businesses while in school. Where the obsession with shipping started.",
+      "I built websites and small apps for local businesses while I was still in school. This is where the love of shipping started.",
     stack: ["JavaScript", "PHP", "MySQL"],
+    icon: "/icons/laptop.png",
   },
 ];
 
@@ -152,25 +176,28 @@ export type Education = {
   degree: string;
   org: string;
   location: string;
+  icon: string;
 };
 
 export const education: Education[] = [
   {
     period: "2021 — 2025",
-    degree: "B.Tech, Computer Science & Engineering",
+    degree: "B.Tech, Computer Science and Engineering",
     org: "Poornima College of Engineering",
     location: "Jaipur, India",
+    icon: "/icons/graduation-cap.png",
   },
   {
     period: "2019 — 2021",
-    degree: "Senior Secondary — Science & Mathematics",
+    degree: "Senior Secondary, Science and Mathematics",
     org: "My Own School",
     location: "Jaipur, India",
+    icon: "/icons/pencil.png",
   },
 ];
 
 export const marquee = [
-  "Front-End",
+  "Frontend",
   "Web3",
   "React",
   "Next.js",

@@ -3,6 +3,7 @@ import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
 import BatmanModel from "@/components/BatmanModel";
 import BatDots from "@/components/BatDots";
+import { FlickeringGrid } from "@/components/FlickeringGrid";
 import { profile, projects, skills, experience, education } from "@/lib/data";
 
 const COL = "mx-auto w-full max-w-[680px] px-6";
@@ -13,23 +14,13 @@ export default function Home() {
       <Nav />
 
       {/* ────────────────────────── HERO ────────────────────────── */}
-      <section
-        id="top"
-        className="px-3 pb-3 pt-[56px] md:px-5 md:pb-5"
-      >
+      <section id="top" className="px-3 pb-3 pt-[56px] md:px-5 md:pb-5">
         <div className="flex min-h-[calc(100svh-4.25rem)] flex-col items-center justify-center rounded-[28px] bg-[#131318] p-6 text-center md:min-h-[calc(100svh-4.75rem)] md:p-10">
-          {/* 16:10 porthole — Batman peeks over the rim and pokes out the top.
-              border-radius is half the height (202.5px ÷ 2 = 101.25px) in
-              absolute units → a capsule with rounded ends. The model's mask is
-              a capsule of the same half-height proportion, so the two align.
-              The rim is this div's own border, so the canvas (a child) paints
-              in front of it. */}
+          {/* 16:10 porthole — Batman peeks over the rim and pokes out the top. */}
           <div
             className="rise relative aspect-[16/10] w-full max-w-[324px] rounded-[101.25px] border-8 border-ink-line bg-black"
             style={{ ["--rise-delay" as string]: "0ms" }}
           >
-            {/* fixed dot matrix behind the model — dots inside the bat
-                silhouette are lit yellow (binary per dot, never clipped) */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 overflow-hidden rounded-[101.25px]"
@@ -54,7 +45,7 @@ export default function Home() {
           </p>
 
           <p
-            className="rise mt-8 max-w-[44ch] text-lg leading-relaxed text-ivory-dim"
+            className="rise mt-8 max-w-[46ch] text-lg leading-relaxed text-ivory-dim"
             style={{ ["--rise-delay" as string]: "300ms" }}
           >
             {profile.tagline}
@@ -83,12 +74,12 @@ export default function Home() {
       {/* ───────────────────────── ABOUT ───────────────────────── */}
       <section className="py-28 md:py-36">
         <div className={COL}>
-          <Reveal as="p" className="label mb-8">
+          <Reveal as="h2" className="mb-8 font-display text-3xl tracking-[-0.01em] md:text-4xl">
             About
           </Reveal>
           <Reveal
             as="p"
-            className="font-display text-2xl leading-[1.45] text-ivory md:text-[1.9rem]"
+            className="text-2xl leading-[1.5] tracking-[-0.01em] text-ivory md:text-[1.7rem]"
           >
             {profile.intro}
           </Reveal>
@@ -104,7 +95,7 @@ export default function Home() {
                   height={96}
                   className="mb-3 h-9 w-9 select-none object-contain opacity-90 drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
                 />
-                <div className="font-display text-3xl text-ivory md:text-4xl">
+                <div className="text-3xl font-medium tracking-tight text-ivory md:text-4xl">
                   {s.value}
                 </div>
                 <div className="label mt-2">{s.label}</div>
@@ -117,59 +108,64 @@ export default function Home() {
       {/* ─────────────────────── WORK / PROJECTS ────────────────── */}
       <section id="work" className="py-28 md:py-32">
         <div className={COL}>
-          <Reveal className="mb-12 flex items-baseline justify-between">
-            <h2 className="font-display text-3xl tracking-[-0.01em] md:text-4xl">
-              Selected work
-            </h2>
-            <span className="label">01 — projects</span>
+          <Reveal
+            as="h2"
+            className="mb-12 font-display text-3xl tracking-[-0.01em] md:text-4xl"
+          >
+            Selected work
           </Reveal>
 
-          <ol className="border-t border-ink-line">
+          <div className="grid auto-rows-[minmax(11rem,1fr)] grid-cols-1 gap-3 sm:grid-cols-2 lg:auto-rows-[13.5rem] lg:grid-cols-3">
             {projects.map((p, i) => (
-              <Reveal key={p.index} as="li" delay={i * 50}>
+              <Reveal key={p.index} delay={i * 40} className={p.span}>
                 <a
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block border-b border-ink-line py-9 transition-opacity duration-300"
+                  className="group flex h-full flex-col justify-between rounded-2xl border border-ink-line bg-ink-soft p-6 transition-colors duration-300 hover:border-ivory-faint hover:bg-ivory/[0.03]"
                 >
-                  <div className="flex items-baseline justify-between gap-6">
-                    <h3 className="font-display text-2xl text-ivory md:text-[1.7rem]">
-                      <span className="mono mr-3 align-middle text-xs not-italic text-ivory-faint">
-                        {p.index}
-                      </span>
+                  <div className="flex items-start justify-between">
+                    <Image
+                      src={p.icon}
+                      alt=""
+                      aria-hidden
+                      width={96}
+                      height={96}
+                      className="h-11 w-11 select-none object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
+                    />
+                    <span className="mono text-xs text-ivory-faint">{p.year}</span>
+                  </div>
+                  <div className="mt-6">
+                    <h3 className="flex items-center gap-2 text-lg font-medium text-ivory">
                       {p.title}
-                      <span className="ml-2 inline-block translate-x-[-4px] not-italic text-ivory-faint opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                      <span className="translate-x-[-4px] text-ivory-faint opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
                         ↗
                       </span>
                     </h3>
-                    <span className="mono shrink-0 text-xs text-ivory-faint">
-                      {p.year}
-                    </span>
-                  </div>
-                  <p className="mt-3 max-w-[54ch] leading-relaxed text-ivory-dim">
-                    {p.blurb}
-                  </p>
-                  <div className="mono mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ivory-faint">
-                    <span className="text-ivory-dim">{p.role}</span>
-                    <span aria-hidden>·</span>
-                    {p.tags.join("  ·  ")}
+                    <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-ivory-dim">
+                      {p.blurb}
+                    </p>
+                    <div className="mono mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-ivory-faint">
+                      <span className="text-ivory-dim">{p.role}</span>
+                      <span aria-hidden>·</span>
+                      {p.tags.join("  ·  ")}
+                    </div>
                   </div>
                 </a>
               </Reveal>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
       {/* ───────────────────────── SKILLS ──────────────────────── */}
       <section id="skills" className="py-28 md:py-32">
         <div className={COL}>
-          <Reveal className="mb-12 flex items-baseline justify-between">
-            <h2 className="font-display text-3xl tracking-[-0.01em] md:text-4xl">
-              Toolkit
-            </h2>
-            <span className="label">02 — stack</span>
+          <Reveal
+            as="h2"
+            className="mb-12 font-display text-3xl tracking-[-0.01em] md:text-4xl"
+          >
+            Toolkit
           </Reveal>
 
           <dl className="border-t border-ink-line">
@@ -189,9 +185,7 @@ export default function Home() {
                     className="mt-0.5 h-9 w-9 shrink-0 select-none object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
                   />
                   <span>
-                    <span className="font-display text-xl text-ivory">
-                      {g.title}
-                    </span>
+                    <span className="text-lg font-medium text-ivory">{g.title}</span>
                     <span className="label mt-1 block normal-case tracking-normal">
                       {g.note}
                     </span>
@@ -213,30 +207,46 @@ export default function Home() {
       {/* ──────────────────────── EXPERIENCE ────────────────────── */}
       <section id="experience" className="py-28 md:py-32">
         <div className={COL}>
-          <Reveal className="mb-12 flex items-baseline justify-between">
-            <h2 className="font-display text-3xl tracking-[-0.01em] md:text-4xl">
-              Trajectory
-            </h2>
-            <span className="label">03 — experience</span>
+          <Reveal
+            as="h2"
+            className="mb-12 font-display text-3xl tracking-[-0.01em] md:text-4xl"
+          >
+            Trajectory
           </Reveal>
 
-          <div className="border-t border-ink-line">
+          <div>
             {experience.map((job, i) => (
               <Reveal
                 key={job.org}
                 delay={i * 50}
-                className="grid grid-cols-1 gap-2 border-b border-ink-line py-9 md:grid-cols-[150px_1fr] md:gap-8"
+                className="relative flex gap-5 pb-10 last:pb-0"
               >
-                <div className="label pt-1.5">{job.period}</div>
-                <div>
-                  <h3 className="font-display text-xl text-ivory md:text-2xl">
+                {i < experience.length - 1 && (
+                  <span
+                    aria-hidden
+                    className="absolute left-6 top-14 h-[calc(100%-3rem)] w-px bg-ink-line"
+                  />
+                )}
+                <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink-soft ring-1 ring-ink-line">
+                  <Image
+                    src={job.icon}
+                    alt=""
+                    aria-hidden
+                    width={96}
+                    height={96}
+                    className="h-7 w-7 select-none object-contain drop-shadow-[0_3px_8px_rgba(0,0,0,0.5)]"
+                  />
+                </div>
+                <div className="pt-1.5">
+                  <span className="label">{job.period}</span>
+                  <h3 className="mt-1.5 text-lg font-medium text-ivory">
                     {job.role}
-                    <span className="text-ivory-faint"> — {job.org}</span>
+                    <span className="text-ivory-faint"> · {job.org}</span>
                   </h3>
-                  <p className="mt-3 max-w-[54ch] leading-relaxed text-ivory-dim">
+                  <p className="mt-2 max-w-[52ch] leading-relaxed text-ivory-dim">
                     {job.summary}
                   </p>
-                  <div className="mono mt-4 flex flex-wrap gap-x-3 gap-y-1 text-xs text-ivory-faint">
+                  <div className="mono mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-ivory-faint">
                     {job.stack.join("  ·  ")}
                   </div>
                 </div>
@@ -249,11 +259,11 @@ export default function Home() {
       {/* ───────────────────────── EDUCATION ────────────────────── */}
       <section id="education" className="py-28 md:py-32">
         <div className={COL}>
-          <Reveal className="mb-12 flex items-baseline justify-between">
-            <h2 className="font-display text-3xl tracking-[-0.01em] md:text-4xl">
-              Education
-            </h2>
-            <span className="label">04 — education</span>
+          <Reveal
+            as="h2"
+            className="mb-12 font-display text-3xl tracking-[-0.01em] md:text-4xl"
+          >
+            Education
           </Reveal>
 
           <div className="border-t border-ink-line">
@@ -261,14 +271,22 @@ export default function Home() {
               <Reveal
                 key={ed.degree}
                 delay={i * 50}
-                className="grid grid-cols-1 gap-2 border-b border-ink-line py-9 md:grid-cols-[150px_1fr] md:gap-8"
+                className="flex items-start gap-4 border-b border-ink-line py-7"
               >
-                <div className="label pt-1.5">{ed.period}</div>
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink-soft ring-1 ring-ink-line">
+                  <Image
+                    src={ed.icon}
+                    alt=""
+                    aria-hidden
+                    width={96}
+                    height={96}
+                    className="h-7 w-7 select-none object-contain drop-shadow-[0_3px_8px_rgba(0,0,0,0.5)]"
+                  />
+                </div>
                 <div>
-                  <h3 className="font-display text-xl text-ivory md:text-2xl">
-                    {ed.degree}
-                  </h3>
-                  <p className="mono mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-ivory-faint">
+                  <span className="label">{ed.period}</span>
+                  <h3 className="mt-1.5 text-lg font-medium text-ivory">{ed.degree}</h3>
+                  <p className="mono mt-2 flex flex-wrap gap-x-3 gap-y-1 text-xs text-ivory-faint">
                     <span className="text-ivory-dim">{ed.org}</span>
                     <span aria-hidden>·</span>
                     {ed.location}
@@ -280,72 +298,72 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───────────────────────── CONTACT ──────────────────────── */}
-      <section
-        id="contact"
-        className="relative overflow-hidden border-t border-ink-line py-28 md:py-36"
-      >
-        <div className="pointer-events-none absolute -bottom-40 left-1/2 h-[440px] w-[440px] -translate-x-1/2 rounded-full bg-clay/[0.05] blur-[130px]" />
-        <div className={`${COL} relative`}>
-          <Reveal as="p" className="label mb-8">
-            05 — contact
-          </Reveal>
-          <Reveal
-            as="h2"
-            className="font-display text-[clamp(2.25rem,7vw,3.5rem)] leading-[1.05] tracking-[-0.02em]"
-          >
-            Let&apos;s build something good.
-          </Reveal>
+      {/* ──────────────────── CONTACT + FOOTER ───────────────────── */}
+      <section id="contact" className="px-3 pb-3 md:px-5 md:pb-5">
+        <Reveal className="relative overflow-hidden rounded-[28px] bg-ivory px-6 py-14 text-ink md:px-12 md:py-16">
+          <FlickeringGrid
+            className="absolute inset-0 z-0"
+            color="rgb(8, 8, 10)"
+            squareSize={3}
+            gridGap={6}
+            flickerChance={0.25}
+            maxOpacity={0.13}
+          />
+          {/* soften the grid toward the center so text stays crisp */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_70%_70%_at_50%_45%,var(--color-ivory)_30%,transparent_100%)]"
+          />
 
-          <Reveal className="mt-9">
+          <div className="relative z-10 mx-auto max-w-[680px]">
+            <h2 className="max-w-[16ch] font-display text-[clamp(2rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em] text-ink">
+              Got something to build? I would love to help.
+            </h2>
+
             <a
               href={`mailto:${profile.email}`}
-              className="link-underline group inline-flex items-center gap-2 text-lg text-ivory"
+              className="group mt-7 inline-flex items-center gap-2 text-lg font-medium text-ink"
             >
-              {profile.email}
-              <span className="text-ivory-faint transition-transform duration-300 group-hover:translate-x-1">
+              <span className="underline decoration-ink/30 underline-offset-4 transition-colors group-hover:decoration-ink">
+                {profile.email}
+              </span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
             </a>
-          </Reveal>
 
-          <Reveal className="mt-14 border-t border-ink-line">
-            {profile.socials.map((s) => (
+            <div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-ink/10 pt-6">
+              {profile.socials
+                .filter((s) => s.label !== "Email")
+                .map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1.5 text-sm text-ink/70 transition-colors hover:text-ink"
+                  >
+                    {s.label}
+                    <span className="text-ink/40 transition-transform duration-300 group-hover:translate-x-0.5">
+                      ↗
+                    </span>
+                  </a>
+                ))}
+            </div>
+
+            <div className="mt-10 flex flex-col gap-2 text-xs text-ink/50 sm:flex-row sm:items-center sm:justify-between">
+              <span className="mono">© {profile.name}</span>
+              <span className="mono">Built in the dark, with love</span>
               <a
-                key={s.label}
-                href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between border-b border-ink-line py-4"
+                href="#top"
+                className="mono uppercase tracking-widest transition-colors hover:text-ink"
               >
-                <span className="text-ivory">{s.label}</span>
-                <span className="flex items-center gap-3">
-                  <span className="mono text-xs text-ivory-faint">
-                    {s.handle}
-                  </span>
-                  <span className="text-ivory-faint transition-transform duration-300 group-hover:translate-x-1">
-                    ↗
-                  </span>
-                </span>
+                Back to top ↑
               </a>
-            ))}
-          </Reveal>
-        </div>
+            </div>
+          </div>
+        </Reveal>
       </section>
-
-      {/* ───────────────────────── FOOTER ───────────────────────── */}
-      <footer className={`${COL} flex flex-col gap-3 py-10 sm:flex-row sm:items-center sm:justify-between`}>
-        <span className="mono text-xs text-ivory-faint">© {profile.name}</span>
-        <span className="mono text-xs text-ivory-faint">
-          Designed in the dark
-        </span>
-        <a
-          href="#top"
-          className="mono text-xs uppercase tracking-widest text-ivory-dim transition-colors hover:text-ivory"
-        >
-          Back to top ↑
-        </a>
-      </footer>
     </div>
   );
 }

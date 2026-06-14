@@ -83,8 +83,11 @@ rm -f /tmp/things.html /tmp/catalog.tsv   # don't leave temp files behind
 
 ## Currently used icons
 
-Toolkit: `magic-wand` (Frontend), `coins` (Web3), `wrench` (Tooling).
-Stats: `keyboard` (WPM typing), `shield` (LeetCode badge), `trophy` (Hackathons won), `star` (Public repos).
+- Stats: `keyboard` (WPM), `shield` (LeetCode streak), `trophy` (hackathons), `star` (contributions).
+- Toolkit: `magic-wand` (Frontend), `coins` (Web3), `wrench` (Tooling).
+- Projects (bento): `clock` (Clockworks), `padlock` (Cryptophile), `money-bag` (Cryptofund), `chart` (Sorting Visualizer), `smartphone` (Dynamic Island).
+- Trajectory: `tree` (GainForest), `hourglass` (Epoch), `sketchbook` (Samsung), `laptop` (Freelance).
+- Education: `graduation-cap`, `pencil`.
 
 Keep `public/icons/` free of orphans — when you swap an icon out, delete the unused PNG.
 

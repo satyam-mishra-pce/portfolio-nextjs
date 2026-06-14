@@ -20,13 +20,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Satyam Mishra — Full-Stack Developer",
+  title: "Satyam Mishra — Full Stack Developer",
   description:
-    "Satyam Mishra is a full-stack developer crafting accessible React interfaces and the Web3 logic behind them — building dApps with wagmi, viem, and ethers.",
+    "Satyam Mishra builds interfaces for the web with React and Next.js, and dApps with wagmi, viem, and ethers. Coding since childhood.",
   openGraph: {
-    title: "Satyam Mishra — Full-Stack Developer",
+    title: "Satyam Mishra — Full Stack Developer",
     description:
-      "Full-stack developer crafting accessible React interfaces and the Web3 logic behind them.",
+      "Satyam Mishra builds interfaces for the web with React and Next.js, and dApps with wagmi, viem, and ethers.",
     type: "website",
   },
 };
