@@ -7,9 +7,7 @@ export const profile = {
   available: true,
   email: "satyam1308mishra@gmail.com",
   tagline:
-    "I have been writing code since I was 12, and it still feels like play. I build for the web, mostly the parts people touch, and I sweat the details.",
-  intro:
-    "I wrote my first real code at 12 and have not been able to put it down since. It is the rare thing that still feels like play. I think in interfaces: I cannot always dream one up from nothing, but show me a design and I will build it to the last pixel, and show me a bad one and I will tell you exactly what is wrong with it. Most of that happens late, when the city is quiet. These days the work is mostly React and Next.js, with a fair amount of Web3.",
+    "Full stack and Web3 engineer at GainForest. I build dApps end to end, from the Solidity contracts to the last pixel of the interface.",
   stats: [
     { value: "163", label: "WPM peak typing", icon: "/icons/keyboard.png" },
     { value: "1000", label: "Day LeetCode streak", icon: "/icons/shield.png" },
@@ -34,11 +32,20 @@ export type Project = {
   tags: string[];
   href: string;
   icon: string;
-  span: string;
-  featured?: boolean;
 };
 
 export const projects: Project[] = [
+  {
+    index: "05",
+    title: "Dynamic Island",
+    blurb:
+      "Apple's Dynamic Island, rebuilt for the web. A small, springy component that expands and collapses to show whatever you need, with motion that feels right.",
+    year: "2024",
+    role: "Creator",
+    tags: ["React", "Framer Motion", "TypeScript"],
+    href: "https://dynamic-island-react.vercel.app",
+    icon: "/icons/smartphone.png",
+  },
   {
     index: "01",
     title: "Clockworks",
@@ -49,8 +56,6 @@ export const projects: Project[] = [
     tags: ["React", "TypeScript", "npm", "Radix UI"],
     href: "https://clockworks-rcc.vercel.app/",
     icon: "/icons/clock.png",
-    span: "sm:col-span-2 lg:col-span-2",
-    featured: true,
   },
   {
     index: "02",
@@ -62,7 +67,6 @@ export const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "Zustand", "Web Crypto"],
     href: "https://cryptophile.web.app/",
     icon: "/icons/padlock.png",
-    span: "lg:col-span-1",
   },
   {
     index: "03",
@@ -74,7 +78,6 @@ export const projects: Project[] = [
     tags: ["Solidity", "Web3", "Next.js", "Multichain"],
     href: "https://cryptofund-next.vercel.app/",
     icon: "/icons/money-bag.png",
-    span: "lg:col-span-1",
   },
   {
     index: "04",
@@ -86,19 +89,6 @@ export const projects: Project[] = [
     tags: ["React", "Algorithms", "Canvas"],
     href: "https://sorting-visualizer-react.web.app/",
     icon: "/icons/chart.png",
-    span: "lg:col-span-1",
-  },
-  {
-    index: "05",
-    title: "Dynamic Island",
-    blurb:
-      "Apple's Dynamic Island, rebuilt for the web. A small, springy component that expands and collapses to show whatever you need, with motion that feels right.",
-    year: "2024",
-    role: "Creator",
-    tags: ["React", "Framer Motion", "TypeScript"],
-    href: "https://dynamic-island-react.vercel.app",
-    icon: "/icons/smartphone.png",
-    span: "sm:col-span-2 lg:col-span-1",
   },
 ];
 
@@ -121,7 +111,7 @@ export const skills: SkillGroup[] = [
     title: "Tooling",
     note: "Build and ship",
     icon: "/icons/wrench.png",
-    items: ["Git", "Linux", "Vercel", "npm"],
+    items: ["Git", "Linux", "Vercel", "npm", "AI Prompting"],
   },
 ];
 
@@ -137,7 +127,7 @@ export type Job = {
 export const experience: Job[] = [
   {
     period: "2025 — Present",
-    role: "Frontend & Web3 Engineer",
+    role: "Full Stack & Web3 Engineer",
     org: "GainForest",
     summary:
       "I design and build dApps with wagmi, viem, and ethers, and keep a shared React component library in good shape so the team ships faster. I write pull requests with clear descriptions and changelogs.",

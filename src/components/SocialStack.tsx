@@ -35,12 +35,9 @@ const SOCIALS: Social[] = [
   },
 ];
 
-const ROTATE = ["-rotate-6", "rotate-3", "-rotate-3", "rotate-6"];
-const ZINDEX = ["z-10", "z-20", "z-30", "z-40"];
-
 export default function SocialStack() {
   return (
-    <div className="flex items-center">
+    <div className="group flex items-center">
       {SOCIALS.map((s, i) => (
         <a
           key={s.name}
@@ -48,10 +45,10 @@ export default function SocialStack() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={s.name}
-          className={`group/icon relative ${i === 0 ? "" : "-ml-3.5"} ${ROTATE[i]} ${ZINDEX[i]} transition-transform duration-300 ease-out hover:z-50 hover:-translate-y-2.5 hover:rotate-0 hover:scale-110`}
+          className={`relative ${i === 0 ? "" : "-ml-3"} transition-all duration-300 ease-out group-hover:blur-[2px] group-hover:opacity-50 hover:mx-2.5! hover:scale-110 hover:blur-none! hover:opacity-100!`}
         >
           <span
-            className="flex h-12 w-12 items-center justify-center rounded-2xl shadow-md ring-1 ring-black/10 transition-shadow duration-300 group-hover/icon:shadow-xl"
+            className="flex h-12 w-12 items-center justify-center rounded-2xl shadow-md ring-1 ring-black/10"
             style={{ backgroundColor: s.color }}
           >
             <svg viewBox="0 0 24 24" aria-hidden className="h-6 w-6 fill-white">

@@ -5,6 +5,7 @@ import BatmanModel from "@/components/BatmanModel";
 import BatDots from "@/components/BatDots";
 import { FlickeringGrid } from "@/components/FlickeringGrid";
 import SocialStack from "@/components/SocialStack";
+import TechStack from "@/components/TechStack";
 import { profile, projects, skills, experience, education } from "@/lib/data";
 
 const COL = "mx-auto w-full max-w-[680px] px-6";
@@ -69,20 +70,38 @@ export default function Home() {
               Get in touch
             </a>
           </div>
+
+          <div
+            className="rise mt-12 w-full max-w-[420px]"
+            style={{ ["--rise-delay" as string]: "520ms" }}
+          >
+            <TechStack />
+          </div>
         </div>
       </section>
 
       {/* ───────────────────────── ABOUT ───────────────────────── */}
       <section className="py-28 md:py-36">
         <div className={COL}>
-          <Reveal as="h2" className="mb-8 font-display text-3xl tracking-[-0.01em] md:text-4xl">
-            About
+          <Reveal className="mb-10">
+            <h2 className="font-display text-3xl tracking-[-0.01em] md:text-4xl">
+              About
+            </h2>
+            <p className="mt-2 text-sm text-ivory-dim">The man behind the cowl</p>
           </Reveal>
+
           <Reveal
             as="p"
-            className="text-2xl leading-[1.5] tracking-[-0.01em] text-ivory md:text-[1.7rem]"
+            className="text-2xl leading-[1.5] tracking-[-0.01em] text-ivory-faint md:text-[1.7rem]"
           >
-            {profile.intro}
+            <span className="text-ivory">I am Satyam, a developer</span> who has been
+            writing code <span className="text-ivory">since I was 12</span> and never
+            found a reason to stop. I think in interfaces:{" "}
+            <span className="text-ivory">
+              I can build almost any design down to the last pixel
+            </span>
+            , and tell you exactly what makes a bad one feel wrong. The best of it
+            happens late, when the city is quiet.
           </Reveal>
 
           <Reveal className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-ink-line pt-12 sm:grid-cols-4">
@@ -108,67 +127,77 @@ export default function Home() {
 
       {/* ─────────────────────── WORK / PROJECTS ────────────────── */}
       <section id="work" className="py-28 md:py-32">
-        <div className="mx-auto w-full max-w-[1040px] px-6">
-          <Reveal
-            as="h2"
-            className="mb-12 font-display text-3xl tracking-[-0.01em] md:text-4xl"
-          >
-            Selected work
+        <div className={COL}>
+          <Reveal className="mb-10">
+            <h2 className="font-display text-3xl tracking-[-0.01em] md:text-4xl">
+              Selected work
+            </h2>
+            <p className="mt-2 text-sm text-ivory-dim">
+              Gadgets from the belt — swipe for more
+            </p>
           </Reveal>
-
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {projects.map((p, i) => (
-              <Reveal key={p.index} delay={i * 40} className={p.span}>
-                <a
-                  href={p.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex h-full min-h-[13.5rem] flex-col justify-between rounded-2xl border border-ink-line bg-ink-soft p-6 transition-colors duration-300 hover:border-ivory-faint hover:bg-ivory/[0.03]"
-                >
-                  <div className="flex items-start justify-between">
-                    <Image
-                      src={p.icon}
-                      alt=""
-                      aria-hidden
-                      width={96}
-                      height={96}
-                      className={`${p.featured ? "h-14 w-14" : "h-11 w-11"} select-none object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]`}
-                    />
-                    <span className="mono text-xs text-ivory-faint">{p.year}</span>
-                  </div>
-                  <div className="mt-8">
-                    <h3
-                      className={`flex items-center gap-2 font-medium text-ivory ${p.featured ? "text-2xl" : "text-lg"}`}
-                    >
-                      {p.title}
-                      <span className="translate-x-[-4px] text-ivory-faint opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
-                        ↗
-                      </span>
-                    </h3>
-                    <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-ivory-dim">
-                      {p.blurb}
-                    </p>
-                    <div className="mono mt-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-ivory-faint">
-                      <span className="text-ivory-dim">{p.role}</span>
-                      <span aria-hidden>·</span>
-                      {p.tags.join("  ·  ")}
-                    </div>
-                  </div>
-                </a>
-              </Reveal>
-            ))}
-          </div>
         </div>
+
+        {/* Carousel bleeds to the right edge of the viewport but starts at the
+            page column, so it reads as part of the same measure. */}
+        <Reveal className="relative">
+          <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-[max(1.5rem,calc((100%-680px)/2))] py-1 [scroll-padding-left:max(1.5rem,calc((100%-680px)/2))]">
+            {projects.map((p) => (
+              <a
+                key={p.index}
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex w-[300px] shrink-0 snap-start flex-col rounded-[28px] border border-ink-line bg-ink-soft p-8 transition-colors duration-300 hover:border-ivory-faint hover:bg-ivory/[0.03]"
+              >
+                <div className="flex items-start justify-between">
+                  <Image
+                    src={p.icon}
+                    alt=""
+                    aria-hidden
+                    width={128}
+                    height={128}
+                    className="h-[5.5rem] w-[5.5rem] select-none object-contain drop-shadow-[0_6px_14px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span className="mono text-xs text-ivory-faint">{p.year}</span>
+                </div>
+                <div className="mt-auto pt-10">
+                  <h3 className="flex items-center gap-2 text-2xl font-medium text-ivory">
+                    {p.title}
+                    <span className="translate-x-[-4px] text-ivory-faint opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100">
+                      ↗
+                    </span>
+                  </h3>
+                  <p className="mt-3 text-base leading-relaxed text-ivory-dim">
+                    {p.blurb}
+                  </p>
+                  <div className="mono mt-5 flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs text-ivory-faint">
+                    <span className="text-ivory-dim">{p.role}</span>
+                    <span aria-hidden>·</span>
+                    {p.tags.join("  ·  ")}
+                  </div>
+                </div>
+              </a>
+            ))}
+            {/* trailing spacer so the last card can clear the fade */}
+            <div aria-hidden className="w-2 shrink-0" />
+          </div>
+          {/* right fade — signals there is more to scroll */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-ink to-transparent md:w-24"
+          />
+        </Reveal>
       </section>
 
       {/* ───────────────────────── SKILLS ──────────────────────── */}
       <section id="skills" className="py-28 md:py-32">
         <div className={COL}>
-          <Reveal
-            as="h2"
-            className="mb-12 font-display text-3xl tracking-[-0.01em] md:text-4xl"
-          >
-            Toolkit
+          <Reveal className="mb-10">
+            <h2 className="font-display text-3xl tracking-[-0.01em] md:text-4xl">
+              Toolkit
+            </h2>
+            <p className="mt-2 text-sm text-ivory-dim">Everything on the utility belt</p>
           </Reveal>
 
           <dl className="border-t border-ink-line">
@@ -210,11 +239,11 @@ export default function Home() {
       {/* ──────────────────────── EXPERIENCE ────────────────────── */}
       <section id="experience" className="py-28 md:py-32">
         <div className={COL}>
-          <Reveal
-            as="h2"
-            className="mb-12 font-display text-3xl tracking-[-0.01em] md:text-4xl"
-          >
-            Trajectory
+          <Reveal className="mb-12">
+            <h2 className="font-display text-3xl tracking-[-0.01em] md:text-4xl">
+              Trajectory
+            </h2>
+            <p className="mt-2 text-sm text-ivory-dim">Patrols, past and present</p>
           </Reveal>
 
           <div>
@@ -262,11 +291,11 @@ export default function Home() {
       {/* ───────────────────────── EDUCATION ────────────────────── */}
       <section id="education" className="py-28 md:py-32">
         <div className={COL}>
-          <Reveal
-            as="h2"
-            className="mb-12 font-display text-3xl tracking-[-0.01em] md:text-4xl"
-          >
-            Education
+          <Reveal className="mb-10">
+            <h2 className="font-display text-3xl tracking-[-0.01em] md:text-4xl">
+              Education
+            </h2>
+            <p className="mt-2 text-sm text-ivory-dim">Where the training began</p>
           </Reveal>
 
           <div className="border-t border-ink-line">
@@ -312,6 +341,7 @@ export default function Home() {
             <h2 className="max-w-[14ch] font-display text-[clamp(2rem,6vw,3rem)] leading-[1.05] tracking-[-0.02em] text-ink">
               Got something to build? Light the signal.
             </h2>
+            <p className="mt-3 text-sm text-ink/55">Light it, and I answer within a day</p>
 
             <a
               href={`mailto:${profile.email}`}
@@ -325,12 +355,11 @@ export default function Home() {
               </span>
             </a>
 
-            <div className="mt-10 flex flex-wrap items-center gap-x-5 gap-y-4 border-t border-ink/10 pt-7">
-              <span className="text-sm text-ink/60">Reach me on</span>
+            <div className="mt-7">
               <SocialStack />
             </div>
 
-            <div className="mt-12 flex flex-col gap-2 text-xs text-ink/50 sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-14 flex flex-col gap-2 border-t border-ink/10 pt-6 text-xs text-ink/50 sm:flex-row sm:items-center sm:justify-between">
               <span className="mono">© {profile.name}</span>
               <span className="mono">Built after dark</span>
               <a
