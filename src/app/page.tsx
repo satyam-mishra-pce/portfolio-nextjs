@@ -7,20 +7,107 @@ import { FlickeringGrid } from "@/components/FlickeringGrid";
 import SocialStack from "@/components/SocialStack";
 import TechStack from "@/components/TechStack";
 import { profile, projects, skills, experience, education } from "@/lib/data";
+import { ogImageUrl, siteUrl } from "@/lib/seo";
 
 const COL = "mx-auto w-full max-w-[680px] px-6";
 
 export default function Home() {
+  const skillKeywords = Array.from(new Set(skills.flatMap((group) => group.items)));
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${siteUrl}/#person`,
+        name: profile.name,
+        url: siteUrl,
+        email: profile.email,
+        jobTitle: [
+          "Full Stack Developer",
+          "Frontend Developer",
+          "React Developer",
+          "Next.js Developer",
+          "TypeScript Developer",
+          "Web3 Engineer",
+        ],
+        description:
+          "Full stack developer building production React, Next.js, TypeScript, Node.js and Web3 applications with polished user interfaces.",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Jaipur",
+          addressCountry: "IN",
+        },
+        sameAs: profile.socials.filter((social) => !social.href.startsWith("mailto:")).map((social) => social.href),
+        knowsAbout: [
+          "Full stack development",
+          "Frontend engineering",
+          "UI engineering",
+          "Web application development",
+          "API integrations",
+          "Web3 development",
+          ...skillKeywords,
+        ],
+        worksFor: {
+          "@type": "Organization",
+          name: "GainForest",
+        },
+        alumniOf: education.map((item) => ({
+          "@type": "CollegeOrUniversity",
+          name: item.org,
+        })),
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        url: siteUrl,
+        name: `${profile.name} Portfolio`,
+        description: profile.tagline,
+        publisher: { "@id": `${siteUrl}/#person` },
+        inLanguage: "en-IN",
+      },
+      {
+        "@type": "WebPage",
+        "@id": `${siteUrl}/#webpage`,
+        url: siteUrl,
+        name: `${profile.name} — Full Stack Developer`,
+        description: profile.tagline,
+        isPartOf: { "@id": `${siteUrl}/#website` },
+        about: { "@id": `${siteUrl}/#person` },
+        primaryImageOfPage: ogImageUrl,
+        inLanguage: "en-IN",
+      },
+      {
+        "@type": "ItemList",
+        "@id": `${siteUrl}/#selected-work`,
+        name: "Selected work by Satyam Mishra",
+        itemListElement: projects.map((project, index) => ({
+          "@type": "CreativeWork",
+          position: index + 1,
+          name: project.title,
+          description: project.blurb,
+          url: project.href,
+          keywords: project.tags.join(", "),
+          creator: { "@id": `${siteUrl}/#person` },
+        })),
+      },
+    ],
+  };
+
   return (
     <div className="grain relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Nav />
 
       {/* ────────────────────────── HERO ────────────────────────── */}
       <section id="top" className="px-3 pb-3 pt-[56px] md:px-5 md:pb-5">
-        <div className="flex min-h-[calc(100svh-4.25rem)] flex-col items-center justify-center rounded-[28px] bg-[#131318] p-6 text-center md:min-h-[calc(100svh-4.75rem)] md:p-10">
+        <div className="relative isolate flex min-h-[calc(100svh-4.25rem)] flex-col items-center justify-center overflow-hidden rounded-[28px] bg-[#131318] p-6 text-center md:min-h-[calc(100svh-4.75rem)] md:p-10">
+          <TechStack className="z-0" />
           {/* 16:10 porthole — Batman peeks over the rim and pokes out the top. */}
           <div
-            className="rise relative aspect-[16/10] w-full max-w-[324px] rounded-[101.25px] border-8 border-ink-line bg-black"
+            className="rise relative z-10 aspect-[16/10] w-full max-w-[324px] rounded-[101.25px] border-8 border-ink-line bg-black"
             style={{ ["--rise-delay" as string]: "0ms" }}
           >
             <div
@@ -33,28 +120,28 @@ export default function Home() {
           </div>
 
           <h1
-            className="rise mt-10 font-display text-[clamp(2.75rem,9vw,6rem)] leading-[1.05] tracking-[-0.02em] text-ivory"
+            className="rise relative z-10 mt-10 font-display text-[clamp(2.75rem,9vw,6rem)] leading-[1.05] tracking-[-0.02em] text-ivory"
             style={{ ["--rise-delay" as string]: "120ms" }}
           >
             Satyam Mishra
           </h1>
 
           <p
-            className="rise mt-5 text-[0.7rem] uppercase tracking-[0.2em] text-ivory-faint"
+            className="rise relative z-10 mt-5 text-[0.7rem] uppercase tracking-[0.2em] text-ivory-faint"
             style={{ ["--rise-delay" as string]: "200ms" }}
           >
             {profile.role} · {profile.location}
           </p>
 
           <p
-            className="rise mt-8 max-w-[46ch] text-lg leading-relaxed text-ivory-dim"
+            className="rise relative z-10 mt-8 max-w-[46ch] text-lg leading-relaxed text-ivory-dim"
             style={{ ["--rise-delay" as string]: "300ms" }}
           >
             {profile.tagline}
           </p>
 
           <div
-            className="rise mt-10 flex flex-wrap items-center justify-center gap-3"
+            className="rise relative z-10 mt-10 flex flex-wrap items-center justify-center gap-3"
             style={{ ["--rise-delay" as string]: "400ms" }}
           >
             <a
@@ -71,12 +158,6 @@ export default function Home() {
             </a>
           </div>
 
-          <div
-            className="rise mt-12 w-full max-w-[420px]"
-            style={{ ["--rise-delay" as string]: "520ms" }}
-          >
-            <TechStack />
-          </div>
         </div>
       </section>
 
@@ -94,9 +175,10 @@ export default function Home() {
             as="p"
             className="text-2xl leading-[1.5] tracking-[-0.01em] text-ivory-faint md:text-[1.7rem]"
           >
-            <span className="text-ivory">I am Satyam, a developer</span> who has been
-            writing code <span className="text-ivory">since I was 12</span> and never
-            found a reason to stop. I think in interfaces:{" "}
+            <span className="text-ivory">
+              I am Satyam, a developer who has been writing code since I was 12
+            </span>{" "}
+            and never found a reason to stop. I think in interfaces:{" "}
             <span className="text-ivory">
               I can build almost any design down to the last pixel
             </span>
@@ -148,7 +230,7 @@ export default function Home() {
                 href={p.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex w-[300px] shrink-0 snap-start flex-col rounded-[28px] border border-ink-line bg-ink-soft p-8 transition-colors duration-300 hover:border-ivory-faint hover:bg-ivory/[0.03]"
+                className="group flex w-[300px] shrink-0 snap-start flex-col rounded-[28px] border-4 border-ink-line bg-ink-soft p-8 transition-colors duration-300 hover:border-ivory-faint hover:bg-ivory/[0.03]"
               >
                 <div className="flex items-start justify-between">
                   <Image

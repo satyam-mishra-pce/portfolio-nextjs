@@ -7,7 +7,7 @@ export const profile = {
   available: true,
   email: "satyam1308mishra@gmail.com",
   tagline:
-    "Full stack and Web3 engineer at GainForest. I build dApps end to end, from the Solidity contracts to the last pixel of the interface.",
+    "Full stack developer at GainForest. I build production web apps end to end: polished React interfaces, API integrations, data flows, tooling, and deployment details.",
   stats: [
     { value: "163", label: "WPM peak typing", icon: "/icons/keyboard.png" },
     { value: "1000", label: "Day LeetCode streak", icon: "/icons/shield.png" },
