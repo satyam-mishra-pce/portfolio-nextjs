@@ -3,7 +3,7 @@ import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
 import BatmanModel from "@/components/BatmanModel";
 import BatDots from "@/components/BatDots";
-import { profile, projects, skills, experience } from "@/lib/data";
+import { profile, projects, skills, experience, education } from "@/lib/data";
 
 const COL = "mx-auto w-full max-w-[680px] px-6";
 
@@ -246,6 +246,40 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ───────────────────────── EDUCATION ────────────────────── */}
+      <section id="education" className="py-28 md:py-32">
+        <div className={COL}>
+          <Reveal className="mb-12 flex items-baseline justify-between">
+            <h2 className="font-display text-3xl tracking-[-0.01em] md:text-4xl">
+              Education
+            </h2>
+            <span className="label">04 — education</span>
+          </Reveal>
+
+          <div className="border-t border-ink-line">
+            {education.map((ed, i) => (
+              <Reveal
+                key={ed.degree}
+                delay={i * 50}
+                className="grid grid-cols-1 gap-2 border-b border-ink-line py-9 md:grid-cols-[150px_1fr] md:gap-8"
+              >
+                <div className="label pt-1.5">{ed.period}</div>
+                <div>
+                  <h3 className="font-display text-xl text-ivory md:text-2xl">
+                    {ed.degree}
+                  </h3>
+                  <p className="mono mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-ivory-faint">
+                    <span className="text-ivory-dim">{ed.org}</span>
+                    <span aria-hidden>·</span>
+                    {ed.location}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ───────────────────────── CONTACT ──────────────────────── */}
       <section
         id="contact"
@@ -254,7 +288,7 @@ export default function Home() {
         <div className="pointer-events-none absolute -bottom-40 left-1/2 h-[440px] w-[440px] -translate-x-1/2 rounded-full bg-clay/[0.05] blur-[130px]" />
         <div className={`${COL} relative`}>
           <Reveal as="p" className="label mb-8">
-            04 — contact
+            05 — contact
           </Reveal>
           <Reveal
             as="h2"

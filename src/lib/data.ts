@@ -12,9 +12,9 @@ export const profile = {
     "A front-end developer who cares about the details: considered state management, accessibility, and interfaces that feel inevitable. I work across React and Next.js, and I'm increasingly at home in Web3 — building dApps with wagmi, viem, and ethers. I like keeping a few projects in flight at once.",
   stats: [
     { value: "163", label: "WPM peak typing", icon: "/icons/keyboard.png" },
-    { value: "Knight", label: "LeetCode badge", icon: "/icons/shield.png" },
+    { value: "1000", label: "Day LeetCode streak", icon: "/icons/shield.png" },
     { value: "2", label: "Hackathons won", icon: "/icons/trophy.png" },
-    { value: "60+", label: "Public repos", icon: "/icons/star.png" },
+    { value: "1.9k+", label: "Contributions / yr", icon: "/icons/star.png" },
   ],
   socials: [
     { label: "GitHub", handle: "@satyam-mishra-pce", href: "https://github.com/satyam-mishra-pce" },
@@ -136,6 +136,36 @@ export const experience: Job[] = [
     summary:
       "Created 10+ custom themes for Samsung devices with the Theme Studio app, designing 5+ screens per theme in Figma. Several themes passed 100+ downloads.",
     stack: ["Figma", "Theme Studio", "UI Design"],
+  },
+  {
+    period: "2018 — 2019",
+    role: "Junior Developer",
+    org: "Freelance",
+    summary:
+      "Built websites and small apps for local businesses while in school. Where the obsession with shipping started.",
+    stack: ["JavaScript", "PHP", "MySQL"],
+  },
+];
+
+export type Education = {
+  period: string;
+  degree: string;
+  org: string;
+  location: string;
+};
+
+export const education: Education[] = [
+  {
+    period: "2021 — 2025",
+    degree: "B.Tech, Computer Science & Engineering",
+    org: "Poornima College of Engineering",
+    location: "Jaipur, India",
+  },
+  {
+    period: "2019 — 2021",
+    degree: "Senior Secondary — Science & Mathematics",
+    org: "My Own School",
+    location: "Jaipur, India",
   },
 ];
 
