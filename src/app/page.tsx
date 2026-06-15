@@ -221,7 +221,7 @@ export default function Home() {
                 href={p.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex w-[300px] shrink-0 snap-start flex-col rounded-[48px] border-[6px] border-ink-line bg-ink-soft p-8 transition-colors duration-300 hover:border-ivory-faint hover:bg-ivory/[0.03]"
+                className="group flex w-[300px] shrink-0 flex-col rounded-[48px] border-[6px] border-ink-line bg-ink-soft p-8 transition-colors duration-300 hover:border-ivory-faint hover:bg-ivory/[0.03]"
               >
                 <div className="flex items-start justify-between">
                   <Image

@@ -1,45 +1,47 @@
 "use client";
 
 // The work carousel and its controls. Owns the scroll container so the heading
-// chevrons can drive it and reflect whether either end has been reached.
-// Three ways to move it: drag (mouse), the chevron buttons, or native
-// touch/trackpad scrolling — whichever the visitor reaches for first.
+// chevrons can drive it and reflect whether either end has been reached. Three
+// ways to move it: the chevron buttons, mouse drag, or native touch/trackpad
+// scrolling — whichever the visitor reaches for first.
+//
+// We deliberately DON'T use CSS `scroll-snap-type: mandatory`. Mandatory snap
+// fights programmatic smooth scrolling (it re-snaps mid-animation, which both
+// stalls repeated button presses and causes a visible jump). Instead we drive
+// scrolling in JS and recreate the snap *feel* by settling to the nearest card
+// whenever a free scroll ends — that can never conflict, because the target we
+// scroll to already is a settle point.
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 
 const DRAG_THRESHOLD = 6; // px of travel before it counts as a drag, not a click
-const EDGE_EPS = 2; // px slack when deciding we've hit an end
+const EDGE_EPS = 2; // px slack when deciding we've hit an end / moved off one
 
-// scrollLeft values that align each snappable card to the snap start, ascending.
-function snapLefts(el: HTMLElement) {
-  const pad = parseFloat(getComputedStyle(el).scrollPaddingLeft) || 0;
+function prefersReduced() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+// scrollLeft values that align each card to the column start, ascending. Cards
+// are the <a> children; the trailing spacer <div> is ignored.
+function cardStops(el: HTMLElement) {
+  const pad = parseFloat(getComputedStyle(el).paddingLeft) || 0;
   const containerLeft = el.getBoundingClientRect().left;
   const max = el.scrollWidth - el.clientWidth;
   const out: number[] = [];
   for (const child of Array.from(el.children)) {
-    if (!(child instanceof HTMLElement)) continue;
-    if (getComputedStyle(child).scrollSnapAlign === "none") continue; // skip spacer
+    if (!(child instanceof HTMLElement) || child.tagName !== "A") continue;
     const left = el.scrollLeft + (child.getBoundingClientRect().left - containerLeft) - pad;
     out.push(Math.max(0, Math.min(left, max)));
   }
   return out.sort((a, b) => a - b);
 }
 
-// Smoothly scroll to a target, with mandatory snap disabled for the duration.
-// Leaving snap on makes the browser re-snap mid-flight, which stalls a second
-// programmatic scroll (the chevrons would only fire once). Snap is restored
-// once the animation settles, by which point we're already on a snap point.
-function smoothScrollTo(el: HTMLElement, left: number) {
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  el.style.scrollSnapType = "none";
-  el.scrollTo({ left, behavior: reduce ? "auto" : "smooth" });
-  const restore = () => {
-    el.style.scrollSnapType = "";
-    el.removeEventListener("scrollend", restore);
-  };
-  if ("onscrollend" in el) el.addEventListener("scrollend", restore);
-  else window.setTimeout(restore, 400); // Safari has no scrollend yet
+function nearestStop(el: HTMLElement) {
+  return cardStops(el).reduce(
+    (best, x) => (Math.abs(x - el.scrollLeft) < Math.abs(best - el.scrollLeft) ? x : best),
+    el.scrollLeft,
+  );
 }
 
 export default function WorkCarousel({
@@ -69,28 +71,41 @@ export default function WorkCarousel({
     setAtEnd(el.scrollLeft >= max - EDGE_EPS);
   }, []);
 
+  // Settle to the nearest card after a free scroll (touch flick, trackpad, drag
+  // release). No-op when already on a stop, so it can't loop on its own smooth
+  // scroll. Skipped mid-drag.
+  const settle = useCallback(() => {
+    const el = ref.current;
+    if (!el || dragging.current) return;
+    const target = nearestStop(el);
+    if (Math.abs(target - el.scrollLeft) < 1) return;
+    el.scrollTo({ left: target, behavior: prefersReduced() ? "auto" : "smooth" });
+  }, []);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     syncEdges();
     el.addEventListener("scroll", syncEdges, { passive: true });
+    el.addEventListener("scrollend", settle);
     const ro = new ResizeObserver(syncEdges);
     ro.observe(el);
     return () => {
       el.removeEventListener("scroll", syncEdges);
+      el.removeEventListener("scrollend", settle);
       ro.disconnect();
     };
-  }, [syncEdges]);
+  }, [syncEdges, settle]);
 
   function step(dir: 1 | -1) {
     const el = ref.current;
     if (!el) return;
-    const lefts = snapLefts(el);
+    const stops = cardStops(el);
     const target =
       dir === 1
-        ? lefts.find((x) => x > el.scrollLeft + EDGE_EPS) ?? el.scrollWidth
-        : [...lefts].reverse().find((x) => x < el.scrollLeft - EDGE_EPS) ?? 0;
-    smoothScrollTo(el, target);
+        ? stops.find((x) => x > el.scrollLeft + EDGE_EPS) ?? el.scrollWidth
+        : [...stops].reverse().find((x) => x < el.scrollLeft - EDGE_EPS) ?? 0;
+    el.scrollTo({ left: target, behavior: prefersReduced() ? "auto" : "smooth" });
   }
 
   function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
@@ -101,7 +116,6 @@ export default function WorkCarousel({
     moved.current = false;
     startX.current = e.clientX;
     startScroll.current = el.scrollLeft;
-    el.style.scrollSnapType = "none"; // free movement while dragging
   }
 
   function onPointerMove(e: React.PointerEvent<HTMLDivElement>) {
@@ -122,19 +136,7 @@ export default function WorkCarousel({
     const el = ref.current;
     if (!el) return;
     if (el.hasPointerCapture?.(e.pointerId)) el.releasePointerCapture(e.pointerId);
-
-    // Re-enabling mandatory snapping makes the browser jump to the nearest snap
-    // point instantly. Instead, smoothly scroll there ourselves (no jump).
-    if (!moved.current) {
-      el.style.scrollSnapType = "";
-      return;
-    }
-    const lefts = snapLefts(el);
-    const nearest = lefts.reduce(
-      (best, x) => (Math.abs(x - el.scrollLeft) < Math.abs(best - el.scrollLeft) ? x : best),
-      el.scrollLeft,
-    );
-    smoothScrollTo(el, nearest);
+    if (moved.current) settle(); // drag doesn't emit scrollend, so settle here
   }
 
   function onClickCapture(e: React.MouseEvent<HTMLDivElement>) {
@@ -165,7 +167,7 @@ export default function WorkCarousel({
       <Reveal className="relative">
         <div
           ref={ref}
-          className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-[max(1.5rem,calc((100%-680px)/2))] py-1 [scroll-padding-left:max(1.5rem,calc((100%-680px)/2))] md:cursor-grab md:active:cursor-grabbing"
+          className="no-scrollbar flex gap-4 overflow-x-auto px-[max(1.5rem,calc((100%-680px)/2))] py-1 md:cursor-grab md:active:cursor-grabbing"
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
