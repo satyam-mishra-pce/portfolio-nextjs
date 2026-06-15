@@ -175,15 +175,14 @@ export default function Home() {
             as="p"
             className="text-2xl leading-[1.5] tracking-[-0.01em] text-ivory-faint md:text-[1.7rem]"
           >
-            <span className="text-ivory">
-              I am Satyam, a developer who has been writing code since I was 12
-            </span>{" "}
+            <span className="text-ivory">I am Satyam, a developer</span>{" "}
+            and I&apos;ve been writing code{" "}
+            <span className="text-ivory">since I was 12</span>{" "}
             and never found a reason to stop. I think in interfaces:{" "}
             <span className="text-ivory">
               I can build almost any design down to the last pixel
-            </span>
-            , and tell you exactly what makes a bad one feel wrong. The best of it
-            happens late, when the city is quiet.
+            </span>, and tell you exactly what makes a bad one feel wrong. The best
+            of it happens late, when the city is quiet.
           </Reveal>
 
           <Reveal className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-ink-line pt-12 sm:grid-cols-4">
@@ -404,7 +403,7 @@ export default function Home() {
 
       {/* ──────────────────── CONTACT + FOOTER ───────────────────── */}
       <section id="contact" className="px-3 pb-3 md:px-5 md:pb-5">
-        <Reveal className="relative overflow-hidden rounded-[28px] bg-ivory px-6 py-14 text-ink md:px-12 md:py-16">
+        <Reveal className="light-selection relative overflow-hidden rounded-[28px] bg-ivory px-6 py-14 text-ink md:px-12 md:py-16">
           <FlickeringGrid
             className="absolute inset-0 z-0"
             color="rgb(8, 8, 10)"
