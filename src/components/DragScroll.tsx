@@ -9,6 +9,26 @@ import { useRef, type ReactNode } from "react";
 
 const DRAG_THRESHOLD = 6; // px of travel before it counts as a drag, not a click
 
+// The scrollLeft that aligns the nearest child to the snap start — mirrors the
+// container's `snap-start` + `scroll-padding-left` so restoring snap can't nudge.
+function nearestSnapLeft(el: HTMLElement) {
+  const pad = parseFloat(getComputedStyle(el).scrollPaddingLeft) || 0;
+  const containerLeft = el.getBoundingClientRect().left;
+  const max = el.scrollWidth - el.clientWidth;
+  let best = el.scrollLeft;
+  let bestDist = Infinity;
+  for (const child of Array.from(el.children)) {
+    if (!(child instanceof HTMLElement)) continue;
+    const left = el.scrollLeft + (child.getBoundingClientRect().left - containerLeft) - pad;
+    const dist = Math.abs(left - el.scrollLeft);
+    if (dist < bestDist) {
+      bestDist = dist;
+      best = left;
+    }
+  }
+  return Math.max(0, Math.min(best, max));
+}
+
 export default function DragScroll({
   className,
   children,
@@ -50,8 +70,23 @@ export default function DragScroll({
     dragging.current = false;
     const el = ref.current;
     if (!el) return;
-    el.style.scrollSnapType = ""; // restore snap so it settles on a card
     if (el.hasPointerCapture?.(e.pointerId)) el.releasePointerCapture(e.pointerId);
+
+    // Re-enabling mandatory snapping makes the browser jump to the nearest
+    // snap point instantly. Instead, smoothly scroll there ourselves and only
+    // restore native snapping once the animation has settled (no visible jump).
+    if (!moved.current) {
+      el.style.scrollSnapType = "";
+      return;
+    }
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollTo({ left: nearestSnapLeft(el), behavior: reduce ? "auto" : "smooth" });
+    const restore = () => {
+      el.style.scrollSnapType = "";
+      el.removeEventListener("scrollend", restore);
+    };
+    if ("onscrollend" in el) el.addEventListener("scrollend", restore);
+    else window.setTimeout(restore, 400); // Safari has no scrollend yet
   }
 
   function onClickCapture(e: React.MouseEvent<HTMLDivElement>) {
