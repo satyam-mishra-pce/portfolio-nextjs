@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
+import DragScroll from "@/components/DragScroll";
 import BatmanModel from "@/components/BatmanModel";
 import BatDots from "@/components/BatDots";
 import { FlickeringGrid } from "@/components/FlickeringGrid";
@@ -223,7 +224,7 @@ export default function Home() {
         {/* Carousel bleeds to the right edge of the viewport but starts at the
             page column, so it reads as part of the same measure. */}
         <Reveal className="relative">
-          <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-[max(1.5rem,calc((100%-680px)/2))] py-1 [scroll-padding-left:max(1.5rem,calc((100%-680px)/2))]">
+          <DragScroll className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto px-[max(1.5rem,calc((100%-680px)/2))] py-1 [scroll-padding-left:max(1.5rem,calc((100%-680px)/2))] md:cursor-grab md:active:cursor-grabbing">
             {projects.map((p) => (
               <a
                 key={p.index}
@@ -263,7 +264,7 @@ export default function Home() {
             ))}
             {/* trailing spacer so the last card can clear the fade */}
             <div aria-hidden className="w-2 shrink-0" />
-          </div>
+          </DragScroll>
           {/* right fade — signals there is more to scroll */}
           <div
             aria-hidden
