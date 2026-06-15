@@ -7,7 +7,7 @@ export const profile = {
   available: true,
   email: "satyam1308mishra@gmail.com",
   tagline:
-    "Full stack developer at GainForest. I build production web apps end to end: polished React interfaces, API integrations, data flows, tooling, and deployment details.",
+    "Full stack developer at GainForest. I build production web apps end to end with polished React interfaces, API integrations, data flows, tooling, and deployment details.",
   stats: [
     { value: "163", label: "WPM peak typing", icon: "/icons/keyboard.png" },
     { value: "1000", label: "Day LeetCode streak", icon: "/icons/shield.png" },
@@ -126,7 +126,7 @@ export type Job = {
 
 export const experience: Job[] = [
   {
-    period: "2025 — Present",
+    period: "Since 2025",
     role: "Full Stack & Web3 Engineer",
     org: "GainForest",
     summary:
@@ -153,7 +153,7 @@ export const experience: Job[] = [
     icon: "/icons/sketchbook.png",
   },
   {
-    period: "2018 — 2019",
+    period: "2018 to 2019",
     role: "Junior Developer",
     org: "Freelance",
     summary:
@@ -172,13 +172,13 @@ export type Education = {
 
 export const education: Education[] = [
   {
-    period: "2021 — 2025",
+    period: "2021 to 2025",
     degree: "B.Tech, Computer Science and Engineering",
     org: "Poornima College of Engineering",
     location: "Jaipur, India",
   },
   {
-    period: "2019 — 2021",
+    period: "2019 to 2021",
     degree: "Senior Secondary, Science and Mathematics",
     org: "My Own School",
     location: "Jaipur, India",

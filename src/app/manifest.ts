@@ -4,7 +4,7 @@ import { seoDescription, siteUrl } from "@/lib/seo";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: `${profile.name} — Full Stack Developer`,
+    name: `${profile.name} Full Stack Developer`,
     short_name: profile.name,
     description: seoDescription,
     start_url: siteUrl,

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { profile } from "@/lib/data";
 
-export const alt = "Satyam Mishra — Full Stack Developer portfolio";
+export const alt = "Satyam Mishra Full Stack Developer portfolio";
 export const size = {
   width: 1200,
   height: 630,

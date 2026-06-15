@@ -69,7 +69,7 @@ export default function Home() {
         "@type": "WebPage",
         "@id": `${siteUrl}/#webpage`,
         url: siteUrl,
-        name: `${profile.name} — Full Stack Developer`,
+        name: `${profile.name} Full Stack Developer`,
         description: profile.tagline,
         isPartOf: { "@id": `${siteUrl}/#website` },
         about: { "@id": `${siteUrl}/#person` },
@@ -175,14 +175,15 @@ export default function Home() {
             as="p"
             className="text-2xl leading-[1.5] tracking-[-0.01em] text-ivory-faint md:text-[1.7rem]"
           >
-            <span className="text-ivory">I am Satyam, a developer</span>{" "}
-            and I&apos;ve been writing code{" "}
-            <span className="text-ivory">since I was 12</span>{" "}
-            and never found a reason to stop. I think in interfaces:{" "}
             <span className="text-ivory">
-              I can build almost any design down to the last pixel
-            </span>, and tell you exactly what makes a bad one feel wrong. The best
-            of it happens late, when the city is quiet.
+              I am Satyam, a developer who has been writing code since I was 12
+            </span>{" "}
+            and never found a reason to stop. I think in interfaces and{" "}
+            <span className="text-ivory">
+              can build almost any design down to the last pixel
+            </span>{" "}
+            while telling you exactly what makes a bad one feel wrong. The best of
+            it happens late, when the city is quiet.
           </Reveal>
 
           <Reveal className="mt-14 grid grid-cols-2 gap-x-8 gap-y-10 border-t border-ink-line pt-12 sm:grid-cols-4">
@@ -214,7 +215,7 @@ export default function Home() {
               Selected work
             </h2>
             <p className="mt-2 text-sm text-ivory-dim">
-              Gadgets from the belt — swipe for more
+              Gadgets from the belt with more to discover
             </p>
           </Reveal>
         </div>
