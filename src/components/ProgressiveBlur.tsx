@@ -33,7 +33,9 @@ export function ProgressiveBlur({
       return (
         <span
           key={`${stackPosition}-${i}`}
+          className="progressive-blur-layer"
           style={{
+            ["--progressive-blur" as string]: `${blur}px`,
             gridArea: "1 / 1",
             backdropFilter: `blur(${blur}px)`,
             WebkitBackdropFilter: `blur(${blur}px)`,

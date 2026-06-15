@@ -33,13 +33,13 @@ export default function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       {/* progressive blur backdrop — content blurs as it scrolls beneath */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-28">
+      <div className="nav-backdrop pointer-events-none absolute inset-x-0 top-0 h-28">
         <ProgressiveBlur
           position="top"
           height="100%"
           blurLevels={[0.5, 2, 6, 16]}
         />
-        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-ink/70 to-transparent" />
+        <div className="nav-backdrop-gradient absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-ink/70 to-transparent" />
       </div>
 
       <nav className="relative z-20 flex items-center justify-between px-6 py-3 md:px-9">

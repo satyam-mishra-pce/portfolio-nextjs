@@ -147,6 +147,39 @@ body {
   background-size: 100% 1.5px;
 }
 
+/* ───────────────────────  NAV BACKDROP  ──────────────────────── */
+@supports (animation-timeline: scroll()) {
+  .nav-backdrop .progressive-blur-layer,
+  .nav-backdrop .nav-backdrop-gradient {
+    opacity: 0;
+    animation: nav-backdrop-reveal linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0 1rem;
+  }
+
+  .nav-backdrop .progressive-blur-layer {
+    animation-name: nav-progressive-blur-reveal;
+  }
+}
+
+@keyframes nav-backdrop-reveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes nav-progressive-blur-reveal {
+  from {
+    opacity: 0;
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    -webkit-backdrop-filter: blur(var(--progressive-blur));
+    backdrop-filter: blur(var(--progressive-blur));
+  }
+}
+
 /* ───────────────────────  REVEAL ANIM  ───────────────────────── */
 .reveal {
   opacity: 0;
