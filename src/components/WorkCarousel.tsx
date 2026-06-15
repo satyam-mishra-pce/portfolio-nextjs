@@ -26,6 +26,22 @@ function snapLefts(el: HTMLElement) {
   return out.sort((a, b) => a - b);
 }
 
+// Smoothly scroll to a target, with mandatory snap disabled for the duration.
+// Leaving snap on makes the browser re-snap mid-flight, which stalls a second
+// programmatic scroll (the chevrons would only fire once). Snap is restored
+// once the animation settles, by which point we're already on a snap point.
+function smoothScrollTo(el: HTMLElement, left: number) {
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  el.style.scrollSnapType = "none";
+  el.scrollTo({ left, behavior: reduce ? "auto" : "smooth" });
+  const restore = () => {
+    el.style.scrollSnapType = "";
+    el.removeEventListener("scrollend", restore);
+  };
+  if ("onscrollend" in el) el.addEventListener("scrollend", restore);
+  else window.setTimeout(restore, 400); // Safari has no scrollend yet
+}
+
 export default function WorkCarousel({
   col,
   title,
@@ -74,8 +90,7 @@ export default function WorkCarousel({
       dir === 1
         ? lefts.find((x) => x > el.scrollLeft + EDGE_EPS) ?? el.scrollWidth
         : [...lefts].reverse().find((x) => x < el.scrollLeft - EDGE_EPS) ?? 0;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollTo({ left: target, behavior: reduce ? "auto" : "smooth" });
+    smoothScrollTo(el, target);
   }
 
   function onPointerDown(e: React.PointerEvent<HTMLDivElement>) {
@@ -109,8 +124,7 @@ export default function WorkCarousel({
     if (el.hasPointerCapture?.(e.pointerId)) el.releasePointerCapture(e.pointerId);
 
     // Re-enabling mandatory snapping makes the browser jump to the nearest snap
-    // point instantly. Instead, smoothly scroll there ourselves and restore
-    // native snapping only after the animation has settled (no visible jump).
+    // point instantly. Instead, smoothly scroll there ourselves (no jump).
     if (!moved.current) {
       el.style.scrollSnapType = "";
       return;
@@ -120,14 +134,7 @@ export default function WorkCarousel({
       (best, x) => (Math.abs(x - el.scrollLeft) < Math.abs(best - el.scrollLeft) ? x : best),
       el.scrollLeft,
     );
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollTo({ left: nearest, behavior: reduce ? "auto" : "smooth" });
-    const restore = () => {
-      el.style.scrollSnapType = "";
-      el.removeEventListener("scrollend", restore);
-    };
-    if ("onscrollend" in el) el.addEventListener("scrollend", restore);
-    else window.setTimeout(restore, 400); // Safari has no scrollend yet
+    smoothScrollTo(el, nearest);
   }
 
   function onClickCapture(e: React.MouseEvent<HTMLDivElement>) {
