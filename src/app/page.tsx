@@ -2,8 +2,7 @@ import Image from "next/image";
 import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
 import WorkCarousel from "@/components/WorkCarousel";
-import BatmanModel from "@/components/BatmanModel";
-import BatDots from "@/components/BatDots";
+import HeroPortals from "@/components/HeroPortals";
 import { FlickeringGrid } from "@/components/FlickeringGrid";
 import SocialStack from "@/components/SocialStack";
 import TechStack from "@/components/TechStack";
@@ -106,19 +105,9 @@ export default function Home() {
       <section id="top" className="px-3 pb-3 pt-[56px] md:px-5 md:pb-5">
         <div className="relative isolate flex min-h-[calc(100svh-4.25rem)] flex-col items-center justify-center overflow-hidden rounded-[28px] bg-[#131318] p-6 text-center md:min-h-[calc(100svh-4.75rem)] md:p-10">
           <TechStack className="z-0" />
-          {/* 16:10 porthole — Batman peeks over the rim and pokes out the top. */}
-          <div
-            className="rise relative z-10 aspect-[16/10] w-full max-w-[324px] rounded-[101.25px] border-8 border-ink-line bg-black"
-            style={{ ["--rise-delay" as string]: "0ms" }}
-          >
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 overflow-hidden rounded-[101.25px]"
-            >
-              <BatDots />
-            </div>
-            <BatmanModel />
-          </div>
+          {/* Twin portholes — Batman up front, the man behind the cowl alongside;
+             click the small one to swap which leads. */}
+          <HeroPortals />
 
           <h1
             className="rise relative z-10 mt-10 font-display text-[clamp(2.75rem,9vw,6rem)] leading-[1.05] tracking-[-0.02em] text-ivory"

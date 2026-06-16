@@ -110,6 +110,31 @@ body::-webkit-scrollbar,
   mask-repeat: no-repeat, no-repeat;
 }
 
+/* react-three-fiber writes an explicit pixel size onto the <canvas>, and it
+   updates a beat late — during the porthole swap morph that leaves the canvas
+   at its old size pinned top-left until it snaps. Forcing it to fill the stage
+   keeps Batman tracking the morph; only the render resolution catches up late. */
+.bat-stage canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* Portrait porthole stage. Unlike .bat-stage (two unioned mask layers that meet
+   on a seam with square poke-corners), this is ONE path: the capsule plus a
+   center column the width of the capsule's flat top, extended up and overlapping
+   the capsule so there's no 1px seam and the rounded sides match the frame. The
+   cut-out's head pokes through the column; the body clips to the capsule. All in
+   percentages so it scales with the frame between lead and mini. */
+.portrait-stage {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20preserveAspectRatio='none'%3E%3Crect%20x='31.25'%20y='0'%20width='37.5'%20height='38.5'%20fill='%23000'/%3E%3Crect%20x='0'%20y='37.5'%20width='100'%20height='62.5'%20rx='31.25'%20ry='31.25'%20fill='%23000'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%20preserveAspectRatio='none'%3E%3Crect%20x='31.25'%20y='0'%20width='37.5'%20height='38.5'%20fill='%23000'/%3E%3Crect%20x='0'%20y='37.5'%20width='100'%20height='62.5'%20rx='31.25'%20ry='31.25'%20fill='%23000'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
 /* Faint grid texture */
 .gridlines {
   background-image:
