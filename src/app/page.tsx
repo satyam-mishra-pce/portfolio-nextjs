@@ -6,13 +6,16 @@ import HeroPortals from "@/components/HeroPortals";
 import { FlickeringGrid } from "@/components/FlickeringGrid";
 import SocialStack from "@/components/SocialStack";
 import TechStack from "@/components/TechStack";
+import ToolkitGrid from "@/components/ToolkitGrid";
 import { profile, projects, skills, experience, education } from "@/lib/data";
 import { ogImageUrl, siteUrl } from "@/lib/seo";
 
 const COL = "mx-auto w-full max-w-[680px] px-6";
 
 export default function Home() {
-  const skillKeywords = Array.from(new Set(skills.flatMap((group) => group.items)));
+  const skillKeywords = Array.from(
+    new Set(skills.flatMap((group) => group.techs.map((t) => t.name))),
+  );
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -249,39 +252,9 @@ export default function Home() {
             <p className="mt-2 text-sm text-ivory-dim">Everything on the utility belt</p>
           </Reveal>
 
-          <dl className="border-t border-ink-line">
-            {skills.map((g, i) => (
-              <Reveal
-                key={g.title}
-                delay={i * 50}
-                className="grid grid-cols-1 gap-3 border-b border-ink-line py-7 md:grid-cols-[180px_1fr] md:gap-8"
-              >
-                <dt className="flex items-start gap-3">
-                  <Image
-                    src={g.icon}
-                    alt=""
-                    aria-hidden
-                    width={96}
-                    height={96}
-                    className="mt-0.5 h-9 w-9 shrink-0 select-none object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
-                  />
-                  <span>
-                    <span className="text-lg font-medium text-ivory">{g.title}</span>
-                    <span className="label mt-1 block normal-case tracking-normal">
-                      {g.note}
-                    </span>
-                  </span>
-                </dt>
-                <dd className="flex flex-wrap gap-x-5 gap-y-2.5 md:pt-1">
-                  {g.items.map((it) => (
-                    <span key={it} className="text-ivory-dim">
-                      {it}
-                    </span>
-                  ))}
-                </dd>
-              </Reveal>
-            ))}
-          </dl>
+          <Reveal>
+            <ToolkitGrid groups={skills} />
+          </Reveal>
         </div>
       </section>
 

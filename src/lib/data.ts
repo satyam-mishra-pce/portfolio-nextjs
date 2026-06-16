@@ -103,26 +103,168 @@ export const projects: Project[] = [
   },
 ];
 
-export type SkillGroup = { title: string; note: string; icon: string; items: string[] };
+export type Tech = {
+  /** Display name + registry key in ToolkitGrid's icon map. */
+  name: string;
+  /** Second heading line shown on hover, e.g. "with TypeScript". */
+  line2: string;
+  /** Message swapped in while this tech is hovered. */
+  message: string;
+};
+
+export type SkillGroup = {
+  title: string;
+  note: string;
+  icon: string;
+  /** Default message, shown when nothing in the tile is hovered. */
+  blurb: string;
+  techs: Tech[];
+};
 
 export const skills: SkillGroup[] = [
   {
     title: "Frontend",
     note: "Interfaces and experience",
     icon: "/icons/magic-wand.png",
-    items: ["TypeScript", "React", "Next.js", "Tailwind", "HTML", "CSS"],
+    blurb:
+      "I build interfaces that feel fast and considered, typed all the way through and animated with intent.",
+    techs: [
+      {
+        name: "TypeScript",
+        line2: "with TypeScript",
+        message:
+          "I reach for TypeScript on everything so the compiler catches my mistakes before users ever do.",
+      },
+      {
+        name: "React",
+        line2: "with React",
+        message:
+          "I compose React UIs from small pieces and keep state exactly where it belongs.",
+      },
+      {
+        name: "Next.js",
+        line2: "with Next.js",
+        message:
+          "I default to the Next.js App Router and lean on server components to ship pages that load instantly.",
+      },
+      {
+        name: "Tailwind",
+        line2: "with Tailwind",
+        message:
+          "I style straight in the markup with Tailwind so the design stays consistent and the CSS never rots.",
+      },
+      {
+        name: "HTML",
+        line2: "with HTML",
+        message:
+          "I write semantic HTML first so the page stays accessible and search engines actually understand it.",
+      },
+      {
+        name: "CSS",
+        line2: "with CSS",
+        message:
+          "I lean on modern CSS like grid and custom properties for most of the polish you see here.",
+      },
+    ],
   },
   {
     title: "Web3",
     note: "On chain and dApps",
     icon: "/icons/coins.png",
-    items: ["Solidity", "wagmi", "viem", "ethers", "Multichain"],
+    blurb:
+      "I ship onchain, writing the contracts and the dapp glue that make wallets and chains feel ordinary.",
+    techs: [
+      {
+        name: "Solidity",
+        line2: "with Solidity",
+        message:
+          "I write Solidity with gas and safety in mind and test it hard before anything touches mainnet.",
+      },
+      {
+        name: "Ethereum",
+        line2: "on Ethereum",
+        message:
+          "I build on Ethereum and its L2s and think in accounts, calldata, and finality.",
+      },
+      {
+        name: "wagmi",
+        line2: "with wagmi",
+        message:
+          "I wire React to the chain with wagmi so reads, writes, and wallet state all stay typed.",
+      },
+      {
+        name: "ethers",
+        line2: "with ethers",
+        message:
+          "I reach for ethers when I want full control over providers, signers, and encoding.",
+      },
+      {
+        name: "Chainlink",
+        line2: "with Chainlink",
+        message:
+          "I pull in Chainlink feeds and VRF when a contract needs data it cannot generate itself.",
+      },
+    ],
+  },
+  {
+    title: "AI",
+    note: "Models and agents",
+    icon: "/icons/brain.png",
+    blurb:
+      "I build with frontier models, turning prompts, tool use, and agent loops into features people can rely on.",
+    techs: [
+      {
+        name: "Claude",
+        line2: "with Claude",
+        message:
+          "I drive most of my coding and agent work with Claude and tune the prompts until the output ships.",
+      },
+      {
+        name: "GPT",
+        line2: "with GPT",
+        message:
+          "I bring in GPT for structured output and as a second model to check the first.",
+      },
+      {
+        name: "Pi",
+        line2: "with Pi",
+        message:
+          "I use Pi when a flow needs to feel conversational and human rather than transactional.",
+      },
+    ],
   },
   {
     title: "Tooling",
     note: "Build and ship",
     icon: "/icons/wrench.png",
-    items: ["Git", "Linux", "Vercel", "npm", "AI Prompting"],
+    blurb:
+      "I keep the unglamorous layer fast, with version control, a Linux workflow, and a deploy pipeline I trust.",
+    techs: [
+      {
+        name: "Git",
+        line2: "with Git",
+        message:
+          "I keep a clean Git history with small commits and rebases that stay readable.",
+      },
+      {
+        name: "Linux",
+        line2: "on Linux",
+        message:
+          "I live in the terminal on Linux and script away anything I find myself doing twice.",
+      },
+      {
+        name: "Vercel",
+        line2: "with Vercel",
+        message:
+          "I ship on Vercel and let preview deploys catch problems before production ever does.",
+      },
+      {
+        name: "npm",
+        line2: "with npm",
+        message:
+          "I keep the npm dependency graph lean and current so builds stay fast.",
+      },
+    ],
   },
 ];
 
