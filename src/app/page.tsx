@@ -176,9 +176,9 @@ export default function Home() {
             as="p"
             className="text-2xl leading-[1.5] tracking-[-0.01em] text-ivory-faint md:text-[1.7rem]"
           >
-            <span className="text-ivory">
-              I am Satyam, a developer who has been writing code since I was 12
-            </span>{" "}
+            <span className="text-ivory">I am Satyam, a developer</span>{" "}
+            and I&apos;ve been writing code{" "}
+            <span className="text-ivory">since I was 12</span>{" "}
             and never found a reason to stop. I think in interfaces and{" "}
             <span className="text-ivory">
               can build almost any design down to the last pixel
