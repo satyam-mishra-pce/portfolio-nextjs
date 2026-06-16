@@ -308,14 +308,23 @@ export default function Home() {
                     className="absolute left-6 top-14 h-[calc(100%-3rem)] w-px bg-ink-line"
                   />
                 )}
-                <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-ink-soft ring-1 ring-ink-line">
+                <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center">
+                  {/* blurred copy of the icon — colour glow / lighting halo */}
                   <Image
                     src={job.icon}
                     alt=""
                     aria-hidden
                     width={96}
                     height={96}
-                    className="h-7 w-7 select-none object-contain drop-shadow-[0_3px_8px_rgba(0,0,0,0.5)]"
+                    className="pointer-events-none absolute inset-0 m-auto h-9 w-9 select-none object-contain opacity-50 blur-sm"
+                  />
+                  <Image
+                    src={job.icon}
+                    alt=""
+                    aria-hidden
+                    width={96}
+                    height={96}
+                    className="relative h-7 w-7 select-none object-contain drop-shadow-[0_3px_8px_rgba(0,0,0,0.5)]"
                   />
                 </div>
                 <div className="pt-1.5">
