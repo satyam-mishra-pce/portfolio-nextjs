@@ -76,14 +76,14 @@ function Swap({
 }) {
   if (reduce) return <p className={className}>{text}</p>;
   return (
-    <AnimatePresence mode="wait" initial={false}>
+    <AnimatePresence mode="popLayout" initial={false}>
       <motion.p
         key={id}
         className={className}
-        initial={{ opacity: 0, y: 5, filter: "blur(5px)" }}
+        initial={{ opacity: 0, y: 4, filter: "blur(4px)" }}
         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        exit={{ opacity: 0, y: -5, filter: "blur(5px)" }}
-        transition={{ duration: 0.26, ease: EASE }}
+        exit={{ opacity: 0, y: -4, filter: "blur(4px)" }}
+        transition={{ duration: 0.14, ease: EASE }}
       >
         {text}
       </motion.p>
@@ -96,14 +96,12 @@ function TechButton({
   active,
   pinned,
   onPreview,
-  onClearPreview,
   onToggle,
 }: {
   tech: SkillGroup["techs"][number];
   active: boolean;
   pinned: boolean;
   onPreview: () => void;
-  onClearPreview: () => void;
   onToggle: () => void;
 }) {
   const Icon = ICON_MAP[tech.name];
@@ -113,9 +111,7 @@ function TechButton({
       aria-label={tech.name}
       aria-pressed={pinned}
       onMouseEnter={onPreview}
-      onMouseLeave={onClearPreview}
       onFocus={onPreview}
-      onBlur={onClearPreview}
       onClick={onToggle}
       className={`flex h-9 w-9 items-center justify-center rounded-xl outline-none transition-all duration-200 focus-visible:ring-2 focus-visible:ring-ivory-faint ${
         active
@@ -166,7 +162,7 @@ function Row({ group }: { group: SkillGroup }) {
 
       <div className="min-w-0 flex-1">
         {/* heading: title + reserved second line (fixed height, no jump) */}
-        <div className="h-[3.6rem]">
+        <div className="h-[3.15rem]">
           <h3 className="text-xl font-medium leading-tight text-ivory">
             {group.title}
           </h3>
@@ -181,7 +177,7 @@ function Row({ group }: { group: SkillGroup }) {
         </div>
 
         {/* message: fixed height so swaps never resize the row */}
-        <div className="mt-1 h-[5rem] overflow-hidden sm:h-[3.5rem]">
+        <div className="mt-0.5 h-[5rem] overflow-hidden sm:h-[3.5rem]">
           <Swap
             id={current ?? "default"}
             text={hovered ? hovered.message : group.blurb}
@@ -190,7 +186,17 @@ function Row({ group }: { group: SkillGroup }) {
           />
         </div>
 
-        <div className="mt-4 flex flex-wrap gap-1.5">
+        {/* clear preview only when the pointer/focus leaves the whole row, so
+            crossing the gaps between icons never flashes back to default */}
+        <div
+          className="mt-4 flex flex-wrap gap-1.5"
+          onMouseLeave={() => setPreview(null)}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+              setPreview(null);
+            }
+          }}
+        >
           {group.techs.map((tech, i) => (
             <TechButton
               key={tech.name}
@@ -198,7 +204,6 @@ function Row({ group }: { group: SkillGroup }) {
               active={current === i}
               pinned={pinned === i}
               onPreview={() => setPreview(i)}
-              onClearPreview={() => setPreview((cur) => (cur === i ? null : cur))}
               onToggle={() => setPinned((cur) => (cur === i ? null : i))}
             />
           ))}
