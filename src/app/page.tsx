@@ -117,13 +117,6 @@ export default function Home() {
           </h1>
 
           <p
-            className="rise relative z-10 mt-5 text-[0.7rem] uppercase tracking-[0.2em] text-ivory-faint"
-            style={{ ["--rise-delay" as string]: "200ms" }}
-          >
-            {profile.role} · {profile.location}
-          </p>
-
-          <p
             className="rise relative z-10 mt-8 max-w-[46ch] text-lg leading-relaxed text-ivory-dim"
             style={{ ["--rise-delay" as string]: "300ms" }}
           >

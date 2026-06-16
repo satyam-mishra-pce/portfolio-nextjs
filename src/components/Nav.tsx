@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { ProgressiveBlur } from "./ProgressiveBlur";
 
@@ -83,7 +84,15 @@ export default function Nav() {
       <nav className="relative z-20 flex items-center justify-between px-6 py-3 md:px-9">
         {/* left — wordmark */}
         <a href="#top" className="group flex items-center gap-3" onClick={() => setActive("")}>
-          <span className="h-7 w-7 rounded-full bg-gradient-to-br from-ivory-faint to-ink-line ring-1 ring-ink-line transition-transform duration-300 group-hover:scale-95" />
+          <span className="relative h-7 w-7 overflow-hidden rounded-full bg-ink-soft ring-1 ring-ink-line transition-transform duration-300 group-hover:scale-95">
+            <Image
+              src="/me-fg.png"
+              alt="Satyam Mishra"
+              fill
+              sizes="28px"
+              className="object-cover object-[50%_18%]"
+            />
+          </span>
           <span className="text-[15px] font-medium tracking-tight text-ivory">
             Satyam
           </span>
