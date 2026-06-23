@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Nav from "@/components/Nav";
+import Button from "@/components/Button";
+import Chevron from "@/components/Chevron";
 import Reveal from "@/components/Reveal";
 import WorkCarousel from "@/components/WorkCarousel";
 import HeroPortals from "@/components/HeroPortals";
@@ -309,9 +311,35 @@ export default function Home() {
                   <p className="mt-2 max-w-[52ch] leading-relaxed text-ivory-dim">
                     {job.summary}
                   </p>
-                  <div className="mono mt-3 flex flex-wrap gap-x-3 gap-y-1 text-xs text-ivory-faint">
+                  <ul className="mt-3.5 max-w-[52ch] space-y-2">
+                    {job.highlights.map((h) => (
+                      <li
+                        key={h}
+                        className="flex gap-3 text-[15px] leading-relaxed text-ivory-dim"
+                      >
+                        <span
+                          aria-hidden
+                          className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-ivory-dim"
+                        />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mono mt-4 flex flex-wrap gap-x-3 gap-y-1 text-xs text-ivory-faint">
                     {job.stack.join("  ·  ")}
                   </div>
+                  <Button
+                    href={`/experience/${job.slug}`}
+                    variant="secondary"
+                    size="sm"
+                    className="mt-5"
+                  >
+                    Read more
+                    <Chevron
+                      size={15}
+                      className="transition-transform duration-300 group-hover:translate-x-0.5"
+                    />
+                  </Button>
                 </div>
               </Reveal>
             ))}
