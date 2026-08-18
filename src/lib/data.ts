@@ -2,14 +2,14 @@
 
 export const profile = {
   name: "Satyam Mishra",
-  role: "Full Stack Developer",
+  role: "Full Stack & Web3 Engineer",
   location: "Jaipur, India",
   available: true,
   email: "satyam1308mishra@gmail.com",
   tagline:
-    "Full stack developer at GainForest. I build production web apps end to end with polished React interfaces, API integrations, data flows, tooling, and deployment details.",
+    "Full stack developer with a deep love for frontend engineering, and a Web3 engineer. I build production web apps end to end, from polished React interfaces to on-chain flows, and I lean on sharp AI prompting and engineering to move faster without cutting corners.",
   stats: [
-    { value: "163", label: "WPM peak typing", icon: "/icons/keyboard.png" },
+    { value: "#9", label: "World AI Prompt Battle", icon: "/icons/brain.png" },
     { value: "1000", label: "Day LeetCode streak", icon: "/icons/shield.png" },
     { value: "2", label: "Hackathons won", icon: "/icons/trophy.png" },
     { value: "1.9k+", label: "Contributions a year", icon: "/icons/star.png" },
@@ -519,6 +519,7 @@ export const marquee = [
   "React",
   "Next.js",
   "UI Design",
+  "AI Prompting",
   "Open Source",
   "dApps",
   "TypeScript",
