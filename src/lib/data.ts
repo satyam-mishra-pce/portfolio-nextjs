@@ -7,7 +7,7 @@ export const profile = {
   available: true,
   email: "satyam1308mishra@gmail.com",
   tagline:
-    "Full stack and Web3 developer. I build web apps end to end, from the React frontend to onchain flows. I care a lot about frontend, and I use AI heavily in how I work day to day.",
+    "Full stack and Web3 developer. I build web apps end to end, from the React frontend to onchain flows. I care a lot about frontend, and I use AI smartly in how I work day to day.",
   stats: [
     { value: "#9", label: "World AI Prompt Battle", icon: "/icons/brain.png" },
     { value: "1000", label: "Day LeetCode streak", icon: "/icons/shield.png" },
